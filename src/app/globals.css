@@ -1,0 +1,504 @@
+@import 'tailwindcss';
+
+/*
+ * 色は施工写真から取っています。
+ * 白を基調に、芝のグリーン、深い緑のアクセント、生成りの面。
+ */
+@theme {
+  /* 面 */
+  --color-shiro: #ffffff;
+  --color-kinari: #f6f5f0;
+  --color-kinari-2: #edebe3;
+  --color-wakaba: #eef4ea;
+  --color-wakaba-2: #dfe9d9;
+  /* 芝のグリーン */
+  --color-shiba: #4c9444;
+  --color-shiba-2: #6fb262;
+  /* 深い緑（アクセント） */
+  --color-fukami: #1f5a34;
+  --color-fukami-2: #143d23;
+  /* 文字 */
+  --color-sumi: #1c2620;
+  --color-sumi-2: #3d4a42;
+  /* 補助文字。生成り（#f6f5f0）の上でも 4.5:1 を満たす暗さにしてある */
+  --color-hai: #5c6660;
+  /* 線 */
+  --color-sen: #dde2dc;
+  --color-sen-2: #c9d1c8;
+
+  /* 見出し。自前ホストのゴシック（public/fonts）→ 端末標準のゴシックの順に当てる */
+  --font-heading:
+    'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'YuGothic',
+    Meiryo, system-ui, sans-serif;
+  /* 本文。Webフォントは使わず端末標準のゴシックに任せる */
+  --font-body:
+    'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'YuGothic', Meiryo, system-ui,
+    sans-serif;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-shiro);
+  color: var(--color-sumi);
+  font-family: var(--font-body);
+  font-feature-settings: 'palt' 1;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  /* overflow-x: hidden は position: sticky を壊すので入れない */
+}
+
+::selection {
+  background: var(--color-fukami);
+  color: var(--color-shiro);
+}
+
+/*
+ * グリッドの子要素は min-width: auto のままだと、中の表（横スクロール枠）の幅まで広がって
+ * 画面からはみ出す。スマホでの横スクロールを防ぐため、常に縮められるようにしておく。
+ */
+@layer base {
+  .grid > * {
+    min-width: 0;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-fukami);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* ── 見出し ───────────────────────────── */
+  .display {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-wrap: balance;
+  }
+
+  .display-light {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0.05em;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    color: var(--color-fukami);
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    vertical-align: middle;
+    margin-right: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .num {
+    font-family: var(--font-heading);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── ボタン ───────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    min-height: 3.25rem;
+    padding: 0.85rem 1.75rem;
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    border-radius: 2px;
+    transition:
+      background-color 0.35s var(--ease-soft),
+      color 0.35s var(--ease-soft),
+      border-color 0.35s var(--ease-soft),
+      transform 0.35s var(--ease-soft);
+  }
+
+  .btn-primary {
+    background: var(--color-fukami);
+    color: var(--color-shiro);
+    border: 1px solid var(--color-fukami);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-fukami-2);
+    border-color: var(--color-fukami-2);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-fukami);
+    border: 1px solid color-mix(in srgb, var(--color-fukami) 45%, transparent);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-fukami);
+    background: var(--color-wakaba);
+  }
+
+  .btn-white {
+    background: var(--color-shiro);
+    color: var(--color-fukami);
+    border: 1px solid var(--color-shiro);
+  }
+
+  .btn-white:hover {
+    background: var(--color-wakaba);
+  }
+
+  /* ── 罫線リンク ───────────────────────── */
+  .rule-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid currentColor;
+    transition: gap 0.4s var(--ease-soft);
+  }
+
+  .rule-link:hover {
+    gap: 1.2rem;
+  }
+
+  /* ── スクロールで現れる ───────────────── */
+  /* JSが動いているときだけ隠す（html.js）。JSが無効・失敗しても本文が見えなくなることはない */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.9s var(--ease-soft),
+      transform 0.9s var(--ease-soft);
+  }
+
+  .js .reveal[data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .reveal-clip {
+    clip-path: inset(10% 0 0 0);
+    opacity: 0.001;
+    transform: scale(1.04);
+    transition:
+      clip-path 1.3s var(--ease-soft),
+      transform 1.6s var(--ease-soft),
+      opacity 0.8s var(--ease-soft);
+  }
+
+  .js .reveal-clip[data-visible='true'] {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .reveal-line {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.8s var(--ease-soft),
+      transform 0.8s var(--ease-soft);
+  }
+
+  .js .reveal-line[data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── ヒーロー ─────────────────────────── */
+  .hero-fade {
+    animation: hero-fade 1.2s var(--ease-soft) both;
+    animation-delay: var(--hero-delay, 0s);
+  }
+
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* LCPになる写真は透明から始めない（不透明度0の間はLCPとして数えられず、計測上も体感上も遅くなる） */
+  .hero-photo {
+    animation: hero-photo 1.6s var(--ease-soft) both;
+  }
+
+  @keyframes hero-photo {
+    from {
+      transform: scale(1.03);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  /* 写真の上の文字を読ませるための影 */
+  .shade-bottom {
+    background: linear-gradient(
+      to top,
+      rgb(15 30 20 / 0.72) 0%,
+      rgb(15 30 20 / 0.35) 40%,
+      rgb(15 30 20 / 0) 100%
+    );
+  }
+
+  .shade-soft {
+    background: linear-gradient(to top, rgb(15 30 20 / 0.55) 0%, rgb(15 30 20 / 0) 60%);
+  }
+
+  /* 写真の左端を白へ溶かす（ヒーロー） */
+  .fade-left {
+    background: linear-gradient(
+      to right,
+      var(--color-shiro) 0%,
+      color-mix(in srgb, var(--color-shiro) 70%, transparent) 18%,
+      transparent 45%
+    );
+  }
+
+  .fade-up-white {
+    background: linear-gradient(to top, var(--color-shiro) 0%, transparent 55%);
+  }
+
+  /* ── 罫線の枠（カードを使わないための代替） ───────── */
+  .hairline {
+    border: 1px solid var(--color-sen);
+  }
+
+  /*
+   * 画面外のセクションはレイアウトと描画を後回しにする（content-visibility）。
+   * 長いページの初回レイアウトが大幅に軽くなる。中身は最初からHTMLにあるので、
+   * 検索エンジン・AI・支援技術には通常どおり読まれる。
+   */
+  .cv {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+
+  /* ── 表 ───────────────────────────────── */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  .spec-table th,
+  .spec-table td {
+    padding: 0.9rem 0.5rem;
+    border-bottom: 1px solid var(--color-sen);
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.7;
+  }
+
+  .spec-table th {
+    width: 9rem;
+    font-weight: 500;
+    color: var(--color-hai);
+    white-space: nowrap;
+  }
+
+  /* ── 記事本文 ─────────────────────────── */
+  .prose-gp {
+    font-size: 1rem;
+    line-height: 2;
+  }
+
+  .prose-gp > * + * {
+    margin-top: 1.35em;
+  }
+
+  .prose-gp h2 {
+    font-family: var(--font-heading);
+    font-size: 1.32rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    margin-top: 3rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-shiba);
+  }
+
+  .prose-gp h3 {
+    font-family: var(--font-heading);
+    font-size: 1.08rem;
+    font-weight: 500;
+    margin-top: 2.2rem;
+  }
+
+  .prose-gp ul,
+  .prose-gp ol {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .prose-gp li {
+    position: relative;
+    padding-left: 1.2em;
+  }
+
+  .prose-gp li + li {
+    margin-top: 0.45em;
+  }
+
+  .prose-gp ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.95em;
+    width: 0.5em;
+    height: 1px;
+    background: var(--color-shiba);
+  }
+
+  .prose-gp ol {
+    counter-reset: item;
+  }
+
+  .prose-gp ol li {
+    padding-left: 1.7em;
+    counter-increment: item;
+  }
+
+  .prose-gp ol li::before {
+    content: counter(item) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-heading);
+    color: var(--color-fukami);
+    font-weight: 500;
+  }
+
+  .prose-gp a {
+    color: var(--color-fukami);
+    text-decoration-line: underline;
+    text-underline-offset: 0.28em;
+    text-decoration-thickness: 1px;
+  }
+
+  .prose-gp blockquote {
+    border-left: 2px solid var(--color-shiba);
+    padding-left: 1.2rem;
+    color: var(--color-sumi-2);
+  }
+
+  .prose-gp strong {
+    font-weight: 600;
+    background: linear-gradient(transparent 64%, var(--color-wakaba-2) 64%);
+  }
+
+  .prose-gp hr {
+    border: 0;
+    border-top: 1px solid var(--color-sen);
+  }
+
+  .prose-gp table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .prose-gp th,
+  .prose-gp td {
+    padding: 0.7rem 0.75rem;
+    border-bottom: 1px solid var(--color-sen);
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .prose-gp th {
+    font-weight: 500;
+    color: var(--color-hai);
+    border-bottom-color: var(--color-sen-2);
+  }
+
+  /*
+   * 地図の枠。iframe はフォーカスが中のドキュメントへ移るため
+   * iframe 自身が :focus にならない。親側の :focus-within で枠を出す。
+   */
+  .map-frame:focus-within {
+    outline: 2px solid var(--color-fukami);
+    outline-offset: 3px;
+  }
+
+  /* 芝目を思わせる、ごく薄い地紋（画像を使わない） */
+  .grain {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(31 90 52 / 0.035) 0 1px,
+      transparent 1px 7px
+    );
+  }
+
+  /* Before / After スライダーのつまみ */
+  .ba-handle {
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal-clip,
+  .js .reveal-line {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .hero-fade,
+  .hero-photo {
+    animation: none !important;
+  }
+}
