@@ -20,11 +20,11 @@ export default function Supervisor({ className = '' }: { className?: string }) {
         </p>
         <p>
           静岡県東部・中部・伊豆で人工芝の施工と提案を行う専門店。商品仕様・保証・参考価格は
-          <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
+          <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="py-1 underline underline-offset-4">
             本部公式サイト
           </a>
           の掲載内容に基づいています。
-          <Link href="/about" className="ml-1 underline underline-offset-4">
+          <Link href="/about" className="ml-1 py-1 underline underline-offset-4">
             代表について
           </Link>
         </p>

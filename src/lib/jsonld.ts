@@ -51,7 +51,7 @@ export function localBusinessJsonLd() {
     sameAs: [shop.instagram, shop.hq.eastPageUrl],
     priceRange: '¥¥',
     image: images.length ? images : undefined,
-    logo: absoluteUrl('/icon-512.png') ?? undefined,
+    logo: absoluteUrl('/brand/logo.png') ?? undefined,
   };
 
   return prune(data);
@@ -70,7 +70,7 @@ export function organizationJsonLd() {
     telephone: shop.tel,
     email: shop.email,
     sameAs: [shop.instagram, shop.hq.eastPageUrl],
-    logo: absoluteUrl('/icon-512.png') ?? undefined,
+    logo: absoluteUrl('/brand/logo.png') ?? undefined,
     address: postalAddress(),
     parentOrganization: { '@type': 'Organization', name: shop.hq.name, url: shop.hq.url },
   };

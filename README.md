@@ -26,7 +26,7 @@ npm run dev
 | `npm run typecheck` | 型チェック |
 | `npm run fonts:fetch` | 見出し用フォントを `public/fonts` へ取得（初回のみ・取得済み） |
 | `npm run images:prepare` | `assets/originals` の元写真を最適化して `public/photos` へ |
-| `npm run icons:make` | ファビコン・アプリアイコンを生成 |
+| `npm run brand:make` | `public/logo.jpg` からロゴ（透過PNG）・ファビコン・アプリアイコン・OG画像を生成 |
 | `npm run blog:generate` | コラム記事を1本生成（通常はGitHub Actionsから） |
 
 ---
@@ -122,7 +122,8 @@ npm run dev
 - **内部リンク**：記事 → 用途ページ → 事例 → 商品 → 写真見積り の導線。全ページのフッターに用途・ガイド・商品・エリアへの導線。孤立ページなし（監査で確認）
 - **画像**：`next/image`（AVIF/WebP、実寸指定、lazy、priority は LCP 画像のみ）。alt は写っているものを書き、静岡での施工と確認できた写真にだけ地域名を入れています。本部トップのAI生成風イメージは不使用
 - **パフォーマンス**：日本語 `next/font` を使わず、見出しフォント（Zen Kaku Gothic New 500のみ）を自前ホストし、幅1024px以上でだけ非同期読み込み（スマホは端末標準フォント）。画面外のセクションは `content-visibility: auto`（`.cv`）で初回レイアウトを軽量化。`Reveal` はサーバーコンポーネントの印だけにして、監視は `RevealObserver` 1つに集約。地図は lazy iframe。JSを増やすライブラリは未使用
-- **ローカル計測（Lighthouse 12・本番ビルド）**：デスクトップ Perf 99 / A11y 100 / BP 100 / SEO 100。モバイル（simulated 4G・CPU4x）はトップ 80〜92（ばらつきあり）、/dogrun 93、/price 91、/works/… 92、/area/numazu 94、A11y・BP・SEO は全ページ100。本番（Vercel・実機フォント）では PageSpeed Insights で再計測してください
+- **ローカル計測（Lighthouse 12・本番ビルド）**：デスクトップ Perf 98〜99 / A11y 100 / BP 100 / SEO 100。モバイル（simulated 4G・CPU4x）は Perf 83〜94 でばらつきます（Lighthouse の Lantern シミュレーションが LCP を 3〜4.4秒と見積もるため）。Playwright で実際に CPU 4倍・1.6Mbps に絞って計測した LCP はトップ約1.1〜1.2秒、/dogrun 約1.4秒です。A11y・BP・SEO は全ページ100。本番（Vercel・実機フォント）では PageSpeed Insights で再計測してください
+- **徹底監査（2026-09-06）**：57ページ×5幅（360/390/768/1024/1440）で、コンソールエラー・失敗リクエスト・壊れた画像・横はみ出し・文字の切れ・重複id・aria参照切れ・入れ子の対話要素・未表示の要素が無いことを機械確認。操作テスト（メニュー開閉/ESC、下部バー、FAQ、写真見積りフォームの検証と写真縮小、相談フォーム、スライダーのキーボード操作、スキップリンク、地図の読み込み、RSS/sitemap の整形式）を通過
 - **フォーム**：写真見積りは「まだ決めていない段階でも」のコピー。写真はブラウザで縮小してから送信。honeypot・容量制限
 - **計測**：`NEXT_PUBLIC_GA_ID` / `NEXT_PUBLIC_GSC_VERIFICATION` で後から設定可能
 

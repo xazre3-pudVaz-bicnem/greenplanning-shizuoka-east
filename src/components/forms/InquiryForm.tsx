@@ -244,7 +244,7 @@ export default function InquiryForm({ variant }: { variant: Variant }) {
             <textarea id={`${id}-message`} name="message" rows={6} required className={inputClass} placeholder="例：三島市の戸建てです。天然芝の手入れが大変で、人工芝にするか砂利にするか迷っています。まず話を聞かせてください。" />
           </Field>
           <label className="flex items-center gap-3 text-[0.9rem] text-sumi-2">
-            <input type="checkbox" name="sample" value="希望する" className="h-4 w-4 accent-fukami" />
+            <input type="checkbox" name="sample" value="希望する" className="h-5 w-5 accent-fukami" />
             人工芝のサンプルを希望する
           </label>
         </>
@@ -252,9 +252,9 @@ export default function InquiryForm({ variant }: { variant: Variant }) {
 
       <div className="border-t border-sen pt-6">
         <label className="flex items-start gap-3 text-[0.9rem] leading-[1.8] text-sumi-2">
-          <input type="checkbox" name="consent" value="同意する" required className="mt-1.5 h-4 w-4 shrink-0 accent-fukami" />
+          <input type="checkbox" name="consent" value="同意する" required className="mt-1 h-5 w-5 shrink-0 accent-fukami" />
           <span>
-            <Link href="/privacy" className="text-fukami underline underline-offset-4">
+            <Link href="/privacy" className="py-1 text-fukami underline underline-offset-4">
               個人情報保護方針
             </Link>
             に同意のうえ送信します。お預かりした写真は見積りと施工計画にのみ使い、同意なく公開しません。

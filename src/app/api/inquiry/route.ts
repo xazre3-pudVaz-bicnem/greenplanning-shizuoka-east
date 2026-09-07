@@ -85,7 +85,8 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    return NextResponse.json({ ok: false, reason: 'not_configured' }, { status: 503 });
+    // 未設定のあいだは受け取った内容を捨て、画面側で電話・メールの案内に切り替える（received は動作確認用）
+    return NextResponse.json({ ok: false, reason: 'not_configured', received: { photos: attachments.length, bytes: total } }, { status: 503 });
   }
 
   const from = process.env.MAIL_FROM?.trim() || 'onboarding@resend.dev';

@@ -48,14 +48,13 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b bg-white/92 backdrop-blur-md transition-[border-color,box-shadow] duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-white/96 transition-[border-color,box-shadow] duration-500 ${
           scrolled || open ? 'border-sen shadow-[0_1px_0_rgba(0,0,0,0.02),0_8px_30px_rgba(20,40,30,0.06)]' : 'border-transparent'
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[84rem] items-center justify-between px-5 sm:h-[4.75rem] sm:px-8">
-          <Link href="/" className="flex items-center gap-3 text-sumi">
+          <Link href="/" className="flex items-center text-sumi">
             <Logo />
-            <span className="sr-only">トップページへ</span>
           </Link>
 
           <nav aria-label="メインメニュー" className="hidden items-center gap-7 xl:flex">
@@ -132,7 +131,7 @@ export default function Header() {
               <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[0.86rem] text-sumi-2">
                 {serviceLinks.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="underline-offset-4 hover:text-fukami hover:underline">
+                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="inline-block py-1 underline-offset-4 hover:text-fukami hover:underline">
                       {l.label}
                     </Link>
                   </li>
@@ -144,7 +143,7 @@ export default function Header() {
               <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[0.86rem] text-sumi-2">
                 {guideLinks.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="underline-offset-4 hover:text-fukami hover:underline">
+                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="inline-block py-1 underline-offset-4 hover:text-fukami hover:underline">
                       {l.label}
                     </Link>
                   </li>
@@ -153,7 +152,7 @@ export default function Header() {
               <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[0.86rem] text-sumi-2">
                 {companyLinks.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="underline-offset-4 hover:text-fukami hover:underline">
+                    <Link href={l.href} onClick={() => setOpenedAt(null)} className="inline-block py-1 underline-offset-4 hover:text-fukami hover:underline">
                       {l.label}
                     </Link>
                   </li>

@@ -234,7 +234,7 @@ export default function AboutPage() {
               <GoogleMap />
               <p className="mt-3 text-[0.8rem] leading-[1.8] text-hai">
                 {shop.address.full}
-                <a href={shop.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="ml-3 text-fukami underline underline-offset-4">
+                <a href={shop.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="ml-3 py-1 text-fukami underline underline-offset-4">
                   Googleマップで開く
                 </a>
               </p>

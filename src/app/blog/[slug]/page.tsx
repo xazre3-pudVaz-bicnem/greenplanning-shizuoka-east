@@ -67,7 +67,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 <time dateTime={post.publishedAt} className="num">
                   {formatDate(post.publishedAt)}
                 </time>
-                <Link href={`/blog/category/${post.category}`} className="text-fukami underline-offset-4 hover:underline">
+                <Link href={`/blog/category/${post.category}`} className="inline-block py-1 text-fukami underline-offset-4 hover:underline">
                   {category.label}
                 </Link>
               </p>
@@ -94,7 +94,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                       .filter((h) => h.level === 2)
                       .map((h) => (
                         <li key={h.id}>
-                          <a href={`#${h.id}`} className="block text-[0.86rem] leading-[1.7] text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                          <a href={`#${h.id}`} className="block py-0.5 text-[0.86rem] leading-[1.7] text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                             {h.text}
                           </a>
                         </li>

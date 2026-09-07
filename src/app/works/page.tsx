@@ -52,7 +52,7 @@ export default function WorksPage() {
               {workCategoryKeys.map((k) => {
                 const n = getWorksByCategory(k).length;
                 return n > 0 ? (
-                  <Link key={k} href={`/works/category/${k}`} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link key={k} href={`/works/category/${k}`} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {workCategories[k]}（{n}）
                   </Link>
                 ) : (

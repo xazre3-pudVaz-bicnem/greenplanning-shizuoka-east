@@ -82,6 +82,12 @@
 
 `next/font/google` に日本語フォントを渡してはいけません（unicode-range 分割の @font-face が数百個入り、レンダリングブロックCSSが数百KBになります）。見出しフォントは `npm run fonts:fetch` で `public/fonts` に落とし、`layout.tsx` の inline script から非同期に読み込んでいます。
 
+## ロゴ・ファビコン
+
+- 元データは `public/logo.jpg`（本部ブランドロゴ：犬のイラスト＋Green Planning）。`npm run brand:make` で `public/brand/logo.png`（白を透過）・`logo-mark.png`・`src/app/icon.png`・`apple-icon.png`・`public/icon-192/512.png`・`public/og.jpg`（写真＋ロゴ）を生成する
+- ヘッダーとフッターは `components/layout/Logo.tsx`。透過ロゴは白〜生成りの背景でだけ使う（濃い緑の上では犬の白い部分が透ける）
+- ロゴを差し替えるときは `public/logo.jpg` を置き換えて `npm run brand:make` を実行する
+
 ## 画像
 
 - 必ず `components/ui/Photo.tsx` を使う。`fill` のときは親に `relative` と高さを持たせる

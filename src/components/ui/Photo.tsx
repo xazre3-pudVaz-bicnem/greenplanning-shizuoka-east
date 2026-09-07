@@ -35,6 +35,8 @@ export default function Photo({
     src: photo.src,
     sizes,
     priority,
+    // priority のときは fetchpriority=high も明示する（LCP画像がロゴなど他の画像より先に落ちるように）
+    ...(priority ? { fetchPriority: 'high' as const } : {}),
     quality,
     style: position ? { objectPosition: position } : undefined,
   };

@@ -104,14 +104,14 @@ export default function EstimatePage() {
                 <h2 className="eyebrow">電話・メールでも</h2>
                 <ul className="mt-5 space-y-3 text-[0.92rem] text-sumi-2">
                   <li>
-                    <a href={shop.telHref} className="inline-flex items-center gap-2 text-fukami underline underline-offset-4">
+                    <a href={shop.telHref} className="inline-flex items-center gap-2 py-1 text-fukami underline underline-offset-4">
                       <PhoneIcon />
                       <span className="num">{shop.tel}</span>
                     </a>
                     <span className="ml-2 text-[0.78rem] text-hai">{shop.hours.label}</span>
                   </li>
                   <li>
-                    <a href={`mailto:${shop.email}`} className="inline-flex items-center gap-2 break-all text-fukami underline underline-offset-4">
+                    <a href={`mailto:${shop.email}`} className="inline-flex items-center gap-2 break-all py-1 text-fukami underline underline-offset-4">
                       <MailIcon />
                       {shop.email}
                     </a>
@@ -129,7 +129,7 @@ export default function EstimatePage() {
                     { href: '/faq', label: 'よくある質問' },
                   ].map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-fukami underline underline-offset-4">
+                      <Link href={l.href} className="inline-block py-1 text-fukami underline underline-offset-4">
                         {l.label}
                       </Link>
                     </li>

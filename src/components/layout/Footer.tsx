@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           {/* 店舗情報 */}
           <div>
-            <Logo />
+            <Logo size="footer" />
             <p className="mt-5 text-[0.8rem] leading-[1.8] text-hai">{shop.tagline}</p>
             <address className="mt-6 space-y-2.5 text-[0.88rem] not-italic leading-[1.9] text-sumi-2">
               <p className="flex items-start gap-3">
@@ -30,7 +30,7 @@ export default function Footer() {
               <p className="flex items-start gap-3">
                 <PhoneIcon className="mt-[0.4em] shrink-0 text-fukami" />
                 <span>
-                  <a href={shop.telHref} className="num underline-offset-4 hover:underline">
+                  <a href={shop.telHref} className="num inline-block py-0.5 underline-offset-4 hover:underline">
                     {shop.tel}
                   </a>
                   <span className="ml-2 text-[0.78rem] text-hai">{shop.hours.label}</span>
@@ -38,13 +38,13 @@ export default function Footer() {
               </p>
               <p className="flex items-start gap-3">
                 <MailIcon className="mt-[0.4em] shrink-0 text-fukami" />
-                <a href={`mailto:${shop.email}`} className="break-all underline-offset-4 hover:underline">
+                <a href={`mailto:${shop.email}`} className="inline-block break-all py-0.5 underline-offset-4 hover:underline">
                   {shop.email}
                 </a>
               </p>
               <p className="flex items-start gap-3">
                 <InstagramIcon className="mt-[0.4em] shrink-0 text-fukami" />
-                <a href={shop.instagram} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                <a href={shop.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-0.5 underline-offset-4 hover:underline">
                   {shop.instagramHandle}
                 </a>
               </p>
@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-2.5 text-[0.86rem]">
               {serviceLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link href={l.href} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {l.label}
                   </Link>
                 </li>
@@ -70,7 +70,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-2.5 text-[0.86rem]">
               {guideLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link href={l.href} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {l.label}
                   </Link>
                 </li>
@@ -80,7 +80,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-2.5 text-[0.86rem]">
               {products.map((p) => (
                 <li key={p.slug}>
-                  <Link href={`/products/${p.slug}`} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link href={`/products/${p.slug}`} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {p.name}
                   </Link>
                 </li>
@@ -92,23 +92,23 @@ export default function Footer() {
             <p className="eyebrow">静岡EAST</p>
             <ul className="mt-5 space-y-2.5 text-[0.86rem]">
               <li>
-                <Link href="/works" className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                <Link href="/works" className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                   施工事例
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                <Link href="/products" className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                   商品ラインナップ
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                <Link href="/blog" className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                   人工芝コラム
                 </Link>
               </li>
               {companyLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link href={l.href} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {l.label}
                   </Link>
                 </li>
@@ -117,13 +117,13 @@ export default function Footer() {
             <p className="eyebrow mt-9">対応エリア</p>
             <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[0.86rem]">
               <li>
-                <Link href="/area" className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                <Link href="/area" className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                   エリア一覧
                 </Link>
               </li>
               {areaPages.map((a) => (
                 <li key={a.slug}>
-                  <Link href={`/area/${a.slug}`} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                  <Link href={`/area/${a.slug}`} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                     {a.name}
                   </Link>
                 </li>
@@ -138,7 +138,7 @@ export default function Footer() {
           </p>
           <p className="flex flex-wrap items-center gap-x-2">
             <span>全国ネットワーク</span>
-            <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline-offset-4 hover:text-fukami hover:underline">
+            <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1 underline-offset-4 hover:text-fukami hover:underline">
               {shop.hq.name}（本部）
               <ExternalIcon className="text-[0.85em]" />
             </a>

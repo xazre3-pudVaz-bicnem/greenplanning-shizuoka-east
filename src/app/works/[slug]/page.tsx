@@ -113,7 +113,7 @@ export default async function WorkPage({ params }: { params: Promise<Params> }) 
                 </table>
               </div>
               {work.hqUrl && (
-                <a href={work.hqUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-[0.78rem] text-hai underline-offset-4 hover:text-fukami hover:underline">
+                <a href={work.hqUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 py-1 text-[0.78rem] text-hai underline-offset-4 hover:text-fukami hover:underline">
                   本部サイトの掲載ページ
                   <ExternalIcon className="text-[0.85em]" />
                 </a>

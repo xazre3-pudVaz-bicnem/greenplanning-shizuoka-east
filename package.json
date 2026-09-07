@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "fonts:fetch": "node scripts/fetch-fonts.mjs",
     "images:prepare": "node scripts/prepare-images.mjs",
-    "icons:make": "node scripts/make-icons.mjs",
+    "brand:make": "node scripts/make-brand.mjs",
     "blog:generate": "node scripts/generate-blog-post.mjs"
   },
   "dependencies": {

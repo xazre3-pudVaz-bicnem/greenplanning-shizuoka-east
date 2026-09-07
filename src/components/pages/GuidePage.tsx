@@ -95,7 +95,7 @@ export default function GuidePage({ guide }: { guide: Guide }) {
                       .filter((h) => h.level === 2)
                       .map((h) => (
                         <li key={h.id}>
-                          <a href={`#${h.id}`} className="block text-[0.86rem] leading-[1.7] text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                          <a href={`#${h.id}`} className="block py-0.5 text-[0.86rem] leading-[1.7] text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                             {h.text}
                           </a>
                         </li>

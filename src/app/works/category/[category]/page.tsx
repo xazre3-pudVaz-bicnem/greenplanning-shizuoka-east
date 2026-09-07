@@ -55,13 +55,13 @@ export default async function WorkCategoryPage({ params }: { params: Promise<Par
         <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
           <Reveal>
             <nav aria-label="施工事例のカテゴリ" className="flex flex-wrap gap-x-6 gap-y-3 border-b border-sen pb-5 text-[0.88rem]">
-              <Link href="/works" className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+              <Link href="/works" className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                 すべて
               </Link>
               {workCategoryKeys
                 .filter((k) => getWorksByCategory(k).length > 0)
                 .map((k) => (
-                  <Link key={k} href={`/works/category/${k}`} className={k === category ? 'text-fukami' : 'text-sumi-2 underline-offset-4 hover:text-fukami hover:underline'} aria-current={k === category ? 'page' : undefined}>
+                  <Link key={k} href={`/works/category/${k}`} className={k === category ? 'inline-block py-1 text-fukami' : 'inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline'} aria-current={k === category ? 'page' : undefined}>
                     {workCategories[k]}（{getWorksByCategory(k).length}）
                   </Link>
                 ))}

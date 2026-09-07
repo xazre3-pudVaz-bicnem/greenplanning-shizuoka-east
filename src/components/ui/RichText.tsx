@@ -18,13 +18,13 @@ export default function RichText({ text, className = '' }: { text: string; class
     const href = m[2];
     if (href.startsWith('http')) {
       nodes.push(
-        <a key={key++} href={href} target="_blank" rel="noopener noreferrer" className="text-fukami underline underline-offset-4">
+        <a key={key++} href={href} target="_blank" rel="noopener noreferrer" className="py-1 text-fukami underline underline-offset-4">
           {m[1]}
         </a>,
       );
     } else {
       nodes.push(
-        <Link key={key++} href={href} className="text-fukami underline underline-offset-4 decoration-1 hover:decoration-2">
+        <Link key={key++} href={href} className="py-1 text-fukami underline underline-offset-4 decoration-1 hover:decoration-2">
           {m[1]}
         </Link>,
       );

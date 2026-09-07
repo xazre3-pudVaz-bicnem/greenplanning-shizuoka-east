@@ -113,13 +113,13 @@ export default function HomePage() {
       <section className="relative bg-shiro pt-16 sm:pt-[4.75rem]" aria-label="メインビジュアル">
         <div className="lg:grid lg:min-h-[calc(100svh-4.75rem)] lg:grid-cols-[minmax(0,46%)_minmax(0,54%)]">
           <div className="relative order-1 aspect-[4/3] overflow-hidden bg-kinari sm:aspect-[16/10] lg:order-2 lg:aspect-auto lg:h-full lg:min-h-[36rem]">
-            <div className="hero-photo absolute inset-0">
+            <div className="absolute inset-0">
               <Photo photo={photos.gardenHouse} fill sizes="(min-width: 1024px) 54vw, 100vw" priority quality={70} position="50% 55%" />
             </div>
             <div className="fade-left absolute inset-0 hidden lg:block" aria-hidden />
           </div>
           <div className="order-2 flex flex-col justify-center px-5 py-12 sm:px-8 sm:py-16 lg:order-1 lg:py-20 lg:pl-[max(2rem,calc((100vw-84rem)/2+2rem))] lg:pr-12">
-            <p className="hero-fade display text-[2rem] leading-[1.35] text-sumi sm:text-[2.7rem] lg:text-[3.1rem]" style={{ ['--hero-delay' as string]: '0.1s' }}>
+            <p className="hero-fade display text-[2rem] leading-[1.35] text-sumi sm:text-[2.7rem] lg:text-[2.6rem] xl:text-[3.1rem]" style={{ ['--hero-delay' as string]: '0.1s' }}>
               庭が変わると、
               <br />
               暮らしが変わる。
@@ -207,7 +207,7 @@ export default function HomePage() {
               <BeforeAfter before={photos.workTagataBefore} after={photos.workTagataAfter} sizes="(min-width: 1024px) 55vw, 100vw" label="田方郡の戸建て、施工前と施工後の比較" />
               <p className="mt-4 text-[0.8rem] leading-[1.8] text-hai">
                 静岡県田方郡の戸建て。天然芝13㎡をアメイジングターフ35mm＋ジオフィルへ（工期1日）。
-                <Link href={`/works/${mainWork.slug}`} className="ml-2 text-fukami underline underline-offset-4">
+                <Link href={`/works/${mainWork.slug}`} className="ml-2 py-1 text-fukami underline underline-offset-4">
                   この事例を見る
                 </Link>
               </p>
@@ -650,7 +650,7 @@ export default function HomePage() {
                       const page = areaPages.find((a) => a.name === m) ?? (r.key === 'izu' ? areaPages.find((a) => a.slug === 'izu') : undefined);
                       return page ? (
                         <li key={m}>
-                          <Link href={`/area/${page.slug}`} className="text-fukami underline underline-offset-4 decoration-1 hover:decoration-2">
+                          <Link href={`/area/${page.slug}`} className="inline-block py-1 text-fukami underline underline-offset-4 decoration-1 hover:decoration-2">
                             {m}
                           </Link>
                         </li>
@@ -744,7 +744,7 @@ export default function HomePage() {
               <GoogleMap />
               <p className="mt-3 text-[0.8rem] leading-[1.8] text-hai">
                 {shop.address.full}
-                <a href={shop.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="ml-3 text-fukami underline underline-offset-4">
+                <a href={shop.mapLinkUrl} target="_blank" rel="noopener noreferrer" className="ml-3 py-1 text-fukami underline underline-offset-4">
                   Googleマップで開く
                 </a>
               </p>

@@ -177,7 +177,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 施工費用の考え方
                 <span aria-hidden>→</span>
               </Link>
-              <a href={p.hqUrl} target="_blank" rel="noopener noreferrer" className="mt-4 flex items-center gap-1 text-[0.78rem] text-hai underline-offset-4 hover:text-fukami hover:underline">
+              <a href={p.hqUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 py-1 text-[0.78rem] text-hai underline-offset-4 hover:text-fukami hover:underline">
                 本部サイトの商品ページ
                 <ExternalIcon className="text-[0.85em]" />
               </a>

@@ -10,7 +10,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
     {
       label: '直通電話',
       value: (
-        <a href={shop.telHref} className="num underline underline-offset-4">
+        <a href={shop.telHref} className="num inline-block py-1 underline underline-offset-4">
           {shop.tel}
         </a>
       ),
@@ -18,7 +18,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
     {
       label: 'メール',
       value: (
-        <a href={`mailto:${shop.email}`} className="break-all underline underline-offset-4">
+        <a href={`mailto:${shop.email}`} className="inline-block break-all py-1 underline underline-offset-4">
           {shop.email}
         </a>
       ),
@@ -27,7 +27,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
     {
       label: 'Instagram',
       value: (
-        <a href={shop.instagram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
+        <a href={shop.instagram} target="_blank" rel="noopener noreferrer" className="inline-block py-1 underline underline-offset-4">
           {shop.instagramHandle}
         </a>
       ),
@@ -55,7 +55,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
         label: 'ブランド',
         value: (
           <span>
-            <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
+            <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="inline-block py-1 underline underline-offset-4">
               {shop.hq.name}
             </a>
             の静岡県東部・中部・伊豆地域を担当する加盟店

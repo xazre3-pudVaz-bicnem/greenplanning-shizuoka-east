@@ -423,6 +423,8 @@ body {
     text-decoration-line: underline;
     text-underline-offset: 0.28em;
     text-decoration-thickness: 1px;
+    /* 行内リンクの上下パディングは行送りに影響せず、タップ領域だけ広がる */
+    padding: 0.2em 0;
   }
 
   .prose-gp blockquote {

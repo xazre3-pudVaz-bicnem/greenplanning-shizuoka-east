@@ -8,6 +8,8 @@ import { useEffect } from 'react';
  * 1. [data-visible="false"] を IntersectionObserver で監視し、画面に入ったら "true" にする（.reveal の表示）。
  *    React の state を経由しないので、要素が画面に入るたびに再レンダリングが走りません。
  *    クライアント遷移で足された要素は MutationObserver で拾います。
+ *    Endキーやスクロールバーのドラッグで一気に通り過ぎた要素（画面より上に残った未表示のもの）は、
+ *    スクロールのたびに軽く掃いて表示済みにします（content-visibility で後から描画された区画のため）。
  *
  * 2. URLの #フラグメント で飛ぶとき、飛び先より上にある .cv（content-visibility: auto）を先に描画させます。
  *    .cv は画面外のあいだ仮の高さ（contain-intrinsic-size）で置かれているため、そのまま飛ぶと
@@ -21,6 +23,7 @@ export default function RevealObserver() {
     let io: IntersectionObserver | null = null;
     let mo: MutationObserver | null = null;
     let raf = 0;
+    let sweepRaf = 0;
 
     if (typeof IntersectionObserver === 'undefined') {
       all().forEach((el) => {
@@ -47,6 +50,23 @@ export default function RevealObserver() {
       mo.observe(document.body, { childList: true, subtree: true });
     }
 
+    // 画面より上に通り過ぎてしまった未表示の要素を表示済みにする（描画をスキップ中の区画は触らない）
+    const sweep = () => {
+      sweepRaf = 0;
+      for (const el of all()) {
+        if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ contentVisibilityAuto: true })) continue;
+        const r = el.getBoundingClientRect();
+        if (r.height > 0 && r.bottom < 0) {
+          el.dataset.visible = 'true';
+          io?.unobserve(el);
+        }
+      }
+    };
+    const onScroll = () => {
+      if (!sweepRaf) sweepRaf = requestAnimationFrame(sweep);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     /* ── 2. #フラグメントの位置合わせ ── */
     const settleHash = () => {
       let id = '';
@@ -64,15 +84,20 @@ export default function RevealObserver() {
           el.style.contentVisibility = 'visible';
         }
       }
-      requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ block: 'start' });
+        onScroll();
+      });
     };
     settleHash();
     window.addEventListener('hashchange', settleHash);
 
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(sweepRaf);
       mo?.disconnect();
       io?.disconnect();
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('hashchange', settleHash);
     };
   }, []);

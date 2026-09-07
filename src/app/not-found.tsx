@@ -42,7 +42,7 @@ export default function NotFound() {
         <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[0.88rem] text-sumi-2">
           {serviceLinks.map((l) => (
             <li key={l.href}>
-              <Link href={l.href} className="underline-offset-4 hover:text-fukami hover:underline">
+              <Link href={l.href} className="inline-block py-1 underline-offset-4 hover:text-fukami hover:underline">
                 {l.label}
               </Link>
             </li>

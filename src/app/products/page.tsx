@@ -95,7 +95,7 @@ export default function ProductsPage() {
           </ul>
           <p className="mt-6 text-[0.78rem] leading-[1.8] text-hai">
             材料価格は本部公式サイト掲載の㎡あたり税込価格（2026年9月確認）。カット加工料・施工料は別途です。施工を含めた費用の考え方は
-            <Link href="/price" className="ml-1 text-fukami underline underline-offset-4">
+            <Link href="/price" className="ml-1 py-1 text-fukami underline underline-offset-4">
               施工費用・価格
             </Link>
             をご覧ください。

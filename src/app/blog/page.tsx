@@ -58,7 +58,7 @@ export default function BlogIndexPage() {
                 <ul className="mt-4 space-y-2 text-[0.88rem]">
                   {serviceLinks.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                      <Link href={l.href} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                         {l.label}
                       </Link>
                     </li>
@@ -70,7 +70,7 @@ export default function BlogIndexPage() {
                 <ul className="mt-4 space-y-2 text-[0.88rem]">
                   {guideLinks.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                      <Link href={l.href} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                         {l.label}
                       </Link>
                     </li>

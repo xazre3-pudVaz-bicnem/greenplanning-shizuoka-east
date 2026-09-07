@@ -44,7 +44,7 @@ export default function FaqPage() {
           <Reveal>
             <nav aria-label="質問のカテゴリ" className="flex flex-wrap gap-x-6 gap-y-3 border-b border-sen pb-5 text-[0.88rem]">
               {order.map((g) => (
-                <a key={g} href={`#faq-${g}`} className="text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
+                <a key={g} href={`#faq-${g}`} className="inline-block py-1 text-sumi-2 underline-offset-4 hover:text-fukami hover:underline">
                   {faqGroups[g]}
                 </a>
               ))}
