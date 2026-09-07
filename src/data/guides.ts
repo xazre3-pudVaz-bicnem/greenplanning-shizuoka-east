@@ -23,6 +23,11 @@ export type Guide = {
   conclusion: string;
   /** 目安（費用・期間などの要点。表として出す） */
   keyFacts?: { label: string; value: string }[];
+  /**
+   * 本文の前に置く施工前後の比較（スライダー）。
+   * 参考価格の3例のように、本文で挙げた具体例と写真が一対一で対応するときだけ使うこと。
+   */
+  beforeAfter?: { before: PhotoKey; after: PhotoKey; caption: string }[];
   /** 本文（Markdown） */
   body: string;
   faq: { q: string; a: string }[];
@@ -45,8 +50,7 @@ export const guides: Guide[] = [
     intent: '人工芝 施工費用 静岡',
     eyebrow: '費用・価格',
     lead: '「人工芝はいくらかかるのか」に、参考例と内訳で答えます。金額が変わる条件を知っておくと、見積りの比較がしやすくなります。',
-    photo: 'baHouseAfter',
-    photoPosition: '50% 40%',
+    photo: 'turfRollsWide',
     conclusion:
       '静岡で人工芝を業者施工する費用は、本部公式の参考例で、戸建ての庭12㎡（アイランドグラス35mm・土/砂利/デッキ下）が約140,000円、マンション専用庭17㎡（アメイジングターフ35mm・土/雑草）が約180,000円、屋上テラス30㎡（アメイジングターフ35mm・コンクリート）が約230,000円で、いずれも工期1日です。金額は「面積 × 人工芝の単価 ＋ 下地・撤去・副資材 ＋ 施工」で決まり、下地の状態で大きく変わります。写真と広さから無料で概算をお出しします。',
     keyFacts: [
@@ -54,6 +58,11 @@ export const guides: Guide[] = [
       { label: 'マンション専用庭 17㎡', value: 'アメイジングターフ35mm／土・雑草／1日／約180,000円' },
       { label: '屋上テラス 30㎡', value: 'アメイジングターフ35mm／コンクリート／1日／約230,000円' },
       { label: '人工芝の材料価格（税込・施工料別）', value: 'アイランドグラス 3,630〜4,290円/㎡、アメイジングターフLite 4,950円/㎡、アメイジングターフ 6,050円/㎡、ゴルフグリーン用ターフ 9,680円/㎡' },
+    ],
+    beforeAfter: [
+      { before: 'baHouseBefore', after: 'baHouseAfter', caption: '戸建ての庭 12㎡／IslandGrass 35mm／下地は土・砂利・デッキ下／工期1日／約140,000円' },
+      { before: 'baMansionBefore', after: 'baMansionAfter', caption: 'マンション専用庭 17㎡／AmazingTurf 35mm／下地は土・雑草／工期1日／約180,000円' },
+      { before: 'baRooftopBefore', after: 'baRooftopAfter', caption: '屋上テラス 30㎡／AmazingTurf 35mm／下地はコンクリート／工期1日／約230,000円' },
     ],
     body: `## 費用の内訳は5つ
 

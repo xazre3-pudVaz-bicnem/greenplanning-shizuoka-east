@@ -1,3 +1,5 @@
+import type { PhotoKey } from '@/data/photos';
+
 /**
  * 対応エリア。
  *
@@ -47,8 +49,11 @@ export type AreaPage = {
   workSlugs: string[];
   /** 地域FAQ（一般的な質問に地域の事情を加えたもの） */
   faq: { q: string; a: string }[];
-  /** 見出しに使う写真キー（data/photos.ts） */
-  photo: string;
+  /**
+   * 見出しに使う写真。data/photos.ts のキーだけを受け付ける。
+   * ここを string にすると、綴りを間違えても気づけず、既定の写真に差し替わってしまう。
+   */
+  photo: PhotoKey;
   /** meta description（120文字前後） */
   description: string;
 };
@@ -98,7 +103,7 @@ export const areaPages: AreaPage[] = [
     name: '三島市',
     region: 'east',
     access: '沼津の店舗から隣接。日程を合わせやすいエリアです',
-    photo: 'mansionAfter',
+    photo: 'baMansionAfter',
     description:
       '三島市の人工芝施工はグリーンプランニング静岡EAST（沼津市）。水がたまりやすい庭の排水を考えた下地づくり、雑草対策、ドッグラン、天然芝からの張り替えまで対応。写真で概算見積り。',
     intro: [
@@ -176,7 +181,7 @@ export const areaPages: AreaPage[] = [
     name: '富士宮市',
     region: 'east',
     access: '沼津の店舗から富士市経由で伺います',
-    photo: 'naturalToTurfAfter',
+    photo: 'workTagataAfter',
     description:
       '富士宮市の人工芝施工はグリーンプランニング静岡EAST。冬の霜で傷みやすい天然芝からの張り替え、別荘の雑草対策、火山灰土の下地づくりに対応。写真を送るだけで概算見積り。',
     intro: [
@@ -293,7 +298,7 @@ export const areaPages: AreaPage[] = [
     name: '藤枝市',
     region: 'central',
     access: '沼津の店舗から新東名で伺います',
-    photo: 'gardenBeforeAfterAfter',
+    photo: 'baHouseAfter',
     description:
       '藤枝市の人工芝施工はグリーンプランニング静岡EAST。新築の土のままの庭を子どもが遊べる場所に、共働き世帯の手入れいらずの庭に。雑草対策・駐車場まわりも対応。写真で概算見積り。',
     intro: [
@@ -363,7 +368,7 @@ export const areaPages: AreaPage[] = [
     name: '伊豆地域',
     region: 'izu',
     access: '伊豆の国市・伊豆市は沼津の店舗から近く、熱海・伊東・南伊豆方面は日程をまとめて調整します',
-    photo: 'naturalToTurfAfter',
+    photo: 'workTagataAfter',
     description:
       '伊豆市・伊豆の国市・熱海市・伊東市・下田市など伊豆地域の人工芝施工はグリーンプランニング静岡EAST。田方郡での天然芝からの張り替え実績あり。別荘の雑草対策、傾斜地の庭、宿泊施設まで対応。',
     intro: [

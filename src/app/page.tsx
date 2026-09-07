@@ -62,7 +62,7 @@ const uses = [
   { href: '/balcony', title: '屋上', copy: 'コンクリートの屋上を、空の近い緑のテラスに。', photo: 'baRooftopAfter' as const },
   { href: '/parking', title: '駐車場', copy: 'コンクリートの目地に、枯れない緑のラインを。', photo: 'parkingStripes' as const },
   { href: '/parking', title: '玄関・アプローチ', copy: '家の顔になる場所を、手入れなしで整える。', photo: 'entranceApproach' as const },
-  { href: '/facility', title: '店舗・施設', copy: '園庭、店舗前、屋上、ショールーム。管理しやすい緑を。', photo: 'baWeedsAfter' as const },
+  { href: '/facility', title: '店舗・施設', copy: '園庭、店舗前、屋上、ショールーム。管理しやすい緑を。', photo: 'gardenFlowerbedWide' as const },
 ];
 
 const qualitySteps = [

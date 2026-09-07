@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import BeforeAfter from '@/components/ui/BeforeAfter';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import CtaBand from '@/components/ui/CtaBand';
 import Faq from '@/components/ui/Faq';
@@ -81,6 +82,38 @@ export default function GuidePage({ guide }: { guide: Guide }) {
           </div>
         </div>
       </section>
+
+      {/* 施工前後（参考価格の例など、本文の具体例と一対一で対応する写真だけ） */}
+      {guide.beforeAfter && guide.beforeAfter.length > 0 && (
+        <section className="cv bg-shiro pb-4 sm:pb-8" aria-labelledby="ba-heading">
+          <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+            <Reveal variant="line">
+              <h2 id="ba-heading" className="eyebrow">
+                施工前と施工後
+              </h2>
+              <p className="mt-4 text-[0.92rem] leading-[1.9] text-sumi-2">
+                スライダーを動かすと見比べられます。グリーンプランニング本部が公開している参考価格の施工例です。
+              </p>
+            </Reveal>
+            <ul className="mt-8 grid gap-8 lg:grid-cols-3">
+              {guide.beforeAfter.map((ba, i) => (
+                <Reveal as="li" key={ba.caption} delay={i * 80}>
+                  <figure>
+                    <BeforeAfter
+                      before={photos[ba.before]}
+                      after={photos[ba.after]}
+                      sizes="(min-width: 1024px) 30vw, 100vw"
+                      aspectClass="aspect-[4/3]"
+                      label={`${ba.caption} 施工前と施工後の比較`}
+                    />
+                    <figcaption className="mt-3 text-[0.78rem] leading-[1.8] text-hai">{ba.caption}</figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* 本文 */}
       <section className="cv border-t border-sen bg-shiro py-16 sm:py-24">

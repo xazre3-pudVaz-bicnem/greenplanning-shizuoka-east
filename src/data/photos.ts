@@ -255,6 +255,15 @@ export type PhotoKey = keyof typeof photos;
 
 export const photoKeys = Object.keys(photos) as PhotoKey[];
 
+/**
+ * 文字列から写真を引く。ブログのフロントマターなど、型で縛れない値のために用意しています。
+ * 型で縛れる場所（services / guides / areas / products / works）は `PhotoKey` を使ってください。
+ * 綴りを間違えたまま既定の写真に差し替わるのを防ぐため、開発時は警告を出します。
+ */
 export function getPhoto(key: string): Photo {
-  return (photos as Record<string, Photo>)[key] ?? photos.gardenHouse;
+  const found = (photos as Record<string, Photo>)[key];
+  if (!found && process.env.NODE_ENV !== 'production') {
+    console.warn(`[photos] 写真キーが見つかりません: "${key}" — gardenHouse で代用します`);
+  }
+  return found ?? photos.gardenHouse;
 }

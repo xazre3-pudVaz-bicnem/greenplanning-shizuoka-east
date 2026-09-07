@@ -90,6 +90,8 @@
 
 ## 画像
 
+- **写真を指定するフィールドは必ず `PhotoKey` 型にする。** `string` にすると綴りを間違えても型で気づけず、`getPhoto()` が既定の写真に差し替えてしまう（実際に地域ページ4件がこれで同じ写真になっていた）。型で縛れないのはブログのフロントマターの `eyecatch` だけで、そこは生成スクリプト側で検証している
+- **写真は「写っているもの」と使う文脈を合わせる。** マンション専用庭の写真を法人・施設ページに使うといった転用をしない。合う写真がなければ、内容を限定しない写真（`gardenFlowerbedWide` や `turfRollsWide`）を使う
 - 必ず `components/ui/Photo.tsx` を使う。`fill` のときは親に `relative` と高さを持たせる
 - `quality` は `next.config.ts` の `images.qualities`（62 / 70 / 78）にある値だけ
 - 実寸は `src/data/photos.ts` に持たせる（CLS対策）
