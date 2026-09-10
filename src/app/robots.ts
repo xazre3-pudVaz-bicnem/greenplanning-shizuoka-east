@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
-import { siteUrl } from '@/lib/site';
+import { allowIndexing, siteUrl } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
-  // NEXT_PUBLIC_SITE_URL が未設定 = 本番ではない、とみなして全面 Disallow
-  if (!siteUrl) {
+  // 公開前は全面 Disallow。
+  // NEXT_PUBLIC_SITE_URL と NEXT_PUBLIC_ALLOW_INDEXING=true がそろって初めて開放します。
+  if (!siteUrl || !allowIndexing) {
     return { rules: [{ userAgent: '*', disallow: '/' }] };
   }
 

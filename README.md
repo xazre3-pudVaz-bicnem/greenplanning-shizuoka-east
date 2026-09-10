@@ -36,6 +36,7 @@ npm run dev
 | 変数 | 用途 |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | 本番URL（オリジンのみ）。**未設定のあいだは canonical / OG / sitemap を出さず、robots.txt を Disallow にします。** プレビューURLが検索結果に出る事故を構造的に防ぐためです。本番公開時に必ず設定してください。 |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | **検索エンジンへの公開スイッチ。既定は非公開（noindex）。** `true` にしたときだけインデックスを許可します。詳しくは下の「検索エンジンへの公開」を参照。 |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics 4 の測定ID。設定すると gtag を出力します。 |
 | `NEXT_PUBLIC_GSC_VERIFICATION` | Google Search Console の HTMLタグ認証の content 値。設定すると `<meta name="google-site-verification">` を出力します。 |
 | `RESEND_API_KEY` | お問い合わせ・写真見積りフォームのメール送信（Resend）。未設定のとき、フォームは電話・メールの案内に切り替わります。 |
@@ -115,7 +116,8 @@ npm run dev
 
 - **title / description をページごとに完全独自**（title 70文字以内・description 80〜160文字を全66ページで機械確認）
 - **h1 は各ページ1つ**、見出し階層の飛びなし（監査スクリプトで確認）
-- **canonical / OGP / Twitter Card** を `NEXT_PUBLIC_SITE_URL` から生成（未設定なら出さず noindex）
+- **canonical / OGP / Twitter Card** を `NEXT_PUBLIC_SITE_URL` から生成（未設定なら出さない）
+- **インデックスの可否は `NEXT_PUBLIC_ALLOW_INDEXING` で一括制御**。既定は非公開（noindex）。下の「検索エンジンへの公開」を参照
 - **構造化データ**：`HomeAndConstructionBusiness`（name / address / telephone / email / openingHours / areaServed 27市町 / sameAs / founder / parentOrganization）、`Organization`、`WebSite`、`BreadcrumbList`（全下層）、`FAQPage`（画面のFAQと同一内容のみ）、`Service`（用途・地域ページ）、`Product`（offers なし）、`Article`＋`ImageObject`（施工事例）、`BlogPosting`（コラム）、`Person`（代表）、`ItemList`。レビューが無いので `AggregateRating` は出しません
 - **AIO**：各重要ページに「結論」「こんな方に向いています」「費用」「施工期間」「よくある質問」の構造。冒頭で質問に直接回答。「監修：グリーンプランニング静岡EAST 代表 髙橋祐子」を全サービス・ガイド・事例・コラムに表示。`/llms.txt` で entity 情報を要約
 - **ローカルSEO**：NAP を `src/data/shop.ts` の単一ソースから全ページ・構造化データ・llms.txt に展開。対応エリア27市町を `areaServed` に。Googleマップ埋め込み。地域ページは独自情報のみ
@@ -185,10 +187,30 @@ alt は写っているものを書き、静岡で施工したと確認できな�
 
 ---
 
+## 検索エンジンへの公開
+
+**現在このサイトは非公開（noindex）です。** 検索エンジンに載せるには、環境変数 `NEXT_PUBLIC_ALLOW_INDEXING` に `true` を設定して再デプロイしてください。それ以外の値・未設定はすべて非公開として扱います。
+
+「うっかり公開」は検索結果から消すのに時間がかかる一方、「うっかり非公開」は環境変数を1つ足せば戻せます。取り返しのつく側を既定にしています。
+
+| | 非公開（既定） | 公開（`NEXT_PUBLIC_ALLOW_INDEXING=true`） |
+| --- | --- | --- |
+| 各ページの `meta robots` | `noindex, nofollow` | `index, follow, max-image-preview:large` |
+| `robots.txt` | 全面 `Disallow: /` | `Allow: /`（`/api/` のみ Disallow）＋ sitemap の場所 |
+| `sitemap.xml` | 空 | 56URL |
+| `X-Robots-Tag` ヘッダー | 全レスポンスに `noindex, nofollow` | 付けない |
+
+`X-Robots-Tag` を付けているのは、HTMLに `meta` を置けないもの（画像・`/feed.xml`・`/llms.txt`・OG画像）もインデックスさせないためです。`meta robots` だけでは画像が検索結果に残ります。
+
+> **注意**：noindex はクローラーへのお願いであって、アクセス制限ではありません。URLを知っていれば誰でも閲覧できます。関係者以外に一切見せたくない場合は、Vercel の Deployment Protection（パスワード保護）を併用してください。
+
+---
+
 ## デプロイ
 
 1. GitHub にリポジトリを作成して push
 2. Vercel で Import → 環境変数 `NEXT_PUBLIC_SITE_URL`（本番ドメイン）、`RESEND_API_KEY`、`MAIL_FROM`、`MAIL_TO`、必要なら `NEXT_PUBLIC_GA_ID`、`NEXT_PUBLIC_GSC_VERIFICATION`
 3. GitHub の Settings > Secrets and variables > Actions に `ANTHROPIC_API_KEY` を登録（コラム自動投稿）
 4. www 有無は Vercel のドメイン設定でリダイレクトを統一（`NEXT_PUBLIC_SITE_URL` と同じ形に）
-5. Search Console にサイトマップ（`/sitemap.xml`）を送信
+5. 公開してよくなったら `NEXT_PUBLIC_ALLOW_INDEXING=true` を追加して再デプロイ
+6. Search Console にサイトマップ（`/sitemap.xml`）を送信

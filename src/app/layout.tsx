@@ -8,7 +8,7 @@ import MobileBar from '@/components/layout/MobileBar';
 import JsonLd from '@/components/ui/JsonLd';
 import RevealObserver from '@/components/ui/RevealObserver';
 import { localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/jsonld';
-import { defaultDescription, gaId, gscVerification, homeTitle, isPublic, siteName, siteUrl } from '@/lib/site';
+import { allowIndexing, defaultDescription, gaId, gscVerification, homeTitle, isPublic, siteName, siteUrl } from '@/lib/site';
 import { shop } from '@/data/shop';
 
 /*
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   creator: shop.name,
   publisher: shop.name,
   formatDetection: { telephone: true, address: false, email: false },
-  robots: isPublic
+  robots: allowIndexing
     ? { index: true, follow: true, 'max-image-preview': 'large' }
     : { index: false, follow: false },
   ...(gscVerification ? { verification: { google: gscVerification } } : {}),

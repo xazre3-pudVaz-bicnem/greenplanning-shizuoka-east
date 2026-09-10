@@ -20,6 +20,24 @@ export const siteUrl: string | null = (() => {
 
 export const isPublic = siteUrl !== null;
 
+/**
+ * 検索エンジンにインデックスさせてよいか。
+ *
+ * 既定は「させない」。インデックスさせるには、本番URL（NEXT_PUBLIC_SITE_URL）に加えて
+ * NEXT_PUBLIC_ALLOW_INDEXING に true を明示する必要があります。
+ *
+ * 「うっかり公開」は検索結果から消すのに時間がかかる一方、「うっかり非公開」は
+ * 環境変数を1つ足せば戻せます。取り返しのつく側を既定にしています。
+ *
+ * これが false のときは、次のすべてを同時に効かせています。
+ *   - 全ページの meta robots を noindex, nofollow
+ *   - robots.txt を全面 Disallow
+ *   - sitemap.xml を空にする
+ *   - すべてのレスポンスに X-Robots-Tag: noindex, nofollow（next.config.ts）
+ *     → HTML以外（画像・RSS・llms.txt）も対象になります
+ */
+export const allowIndexing = siteUrl !== null && process.env.NEXT_PUBLIC_ALLOW_INDEXING?.trim() === 'true';
+
 export function absoluteUrl(path = '/'): string | null {
   if (!siteUrl) return null;
   return new URL(path, siteUrl).toString();

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { absoluteUrl, isPublic, siteName } from '@/lib/site';
+import { absoluteUrl, allowIndexing, siteName } from '@/lib/site';
 import { shop } from '@/data/shop';
 
 type BuildMetaArgs = {
@@ -40,7 +40,7 @@ export function buildMetadata({
     description,
     ...(keywords && keywords.length ? { keywords } : {}),
     robots:
-      noindex || !isPublic
+      noindex || !allowIndexing
         ? { index: false, follow: false }
         : { index: true, follow: true, 'max-image-preview': 'large' },
   };

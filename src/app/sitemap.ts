@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { blogCategoryKeys, getAllPosts, getPostsByCategory } from '@/lib/blog';
-import { siteUrl } from '@/lib/site';
+import { allowIndexing, siteUrl } from '@/lib/site';
 import { guideLinks, serviceLinks } from '@/data/nav';
 import { products } from '@/data/products';
 import { areaPages } from '@/data/areas';
@@ -23,8 +23,8 @@ const staticRoutes: { path: string; priority: number; changeFrequency: Freq }[] 
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 本番URLが未設定のときは何も出力しない（プレビューURLの誤インデックス防止）
-  if (!siteUrl) return [];
+  // 公開前・本番URL未設定のときは何も出力しない（プレビューURLの誤インデックス防止）
+  if (!siteUrl || !allowIndexing) return [];
   const base = siteUrl;
   const now = new Date();
   const url = (p: string) => new URL(p, base).toString();

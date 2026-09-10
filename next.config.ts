@@ -1,6 +1,14 @@
 import path from 'node:path';
 import type { NextConfig } from 'next';
 
+/**
+ * 検索エンジンにインデックスさせてよいか（src/lib/site.ts の allowIndexing と同じ条件）。
+ * ここでは HTML 以外（画像・RSS・llms.txt など、meta タグを置けないもの）に
+ * X-Robots-Tag を付けるために判定しています。
+ */
+const allowIndexing =
+  Boolean(process.env.NEXT_PUBLIC_SITE_URL?.trim()) && process.env.NEXT_PUBLIC_ALLOW_INDEXING?.trim() === 'true';
+
 const nextConfig: NextConfig = {
   // このリポジトリ単体をルートとして扱う（親ディレクトリの lockfile を拾わせない）
   turbopack: { root: path.resolve(process.cwd()) },
@@ -22,6 +30,8 @@ const nextConfig: NextConfig = {
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          // 公開前は HTML 以外（画像・RSS・llms.txt）もインデックスさせない
+          ...(allowIndexing ? [] : [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]),
         ],
       },
     ];

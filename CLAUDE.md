@@ -97,6 +97,14 @@
 - 実寸は `src/data/photos.ts` に持たせる（CLS対策）
 - 本部トップのAI生成風イメージ画像（main_pc2026 / area_head / cta_bg / bg_security）は使わない
 
+## 検索エンジンへの公開（現在は非公開）
+
+インデックスの可否は `NEXT_PUBLIC_ALLOW_INDEXING` の1つで決まります（`src/lib/site.ts` の `allowIndexing`）。**既定は非公開**で、`true` を明示したときだけ公開になります。`NEXT_PUBLIC_SITE_URL` も必要です。
+
+false のときは、meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag`（`next.config.ts`）の4つが同時に非公開側になります。**どれか1つだけを直さないでください。** 画像やRSSは meta タグを置けないので、`X-Robots-Tag` が無いと検索結果に残ります。
+
+`isPublic`（＝`NEXT_PUBLIC_SITE_URL` の有無）は canonical / OG の出し分け専用です。インデックスの判定に使わないでください。
+
 ## 構造化データ
 
 - `FAQPage` には**画面に出している質問と同じ内容だけ**を渡す
