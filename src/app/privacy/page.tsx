@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import JsonLd from '@/components/ui/JsonLd';
+import Pending from '@/components/ui/Pending';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
 
 export const metadata: Metadata = buildMetadata({
   title: '個人情報保護方針',
-  description: `${shop.name}の個人情報保護方針。お問い合わせ・写真見積りでお預かりする個人情報と写真の取り扱い、利用目的、第三者提供、アクセス解析について。`,
+  description: `${shop.name}の個人情報保護方針。お問い合わせでお預かりする個人情報の取り扱いについて。`,
   path: '/privacy',
 });
 
@@ -16,6 +17,10 @@ const crumbs = [
   { name: '個人情報保護方針', href: '/privacy' },
 ];
 
+/*
+ * 本部や協力会社との情報共有の有無など、静岡EASTに確認できていない運用は書いていません。
+ * 公開前に、静岡EASTの実際の運用と合っているかを確認してもらいます。
+ */
 const sections = [
   {
     h: '1. 事業者',
@@ -24,22 +29,19 @@ const sections = [
   {
     h: '2. 取得する情報',
     p: [
-      'お問い合わせ・写真見積りフォーム、電話、メールを通じて、お名前、住所（市町村・番地）、電話番号、メールアドレス、施工場所の写真・図面、ご相談内容をお預かりします。',
-      'Webサイトの閲覧にあたり、アクセス解析のためにCookie等を利用して閲覧情報を取得する場合があります（個人を特定するものではありません）。',
+      'お問い合わせフォーム・電話・メールを通じて、お名前、市町村、電話番号、メールアドレス、お問い合わせ内容、添付された写真をお預かりします。',
+      'アクセス解析を利用する場合、Cookie等により閲覧情報を取得することがあります。',
     ],
   },
   {
     h: '3. 利用目的',
-    p: [
-      'お問い合わせへの回答、お見積りの作成、現地調査・施工の日程調整、施工後のアフターフォロー、サンプルの送付に利用します。',
-      'お預かりした写真・図面は、お見積りと施工計画の作成にのみ利用し、お客様の同意なく施工事例等として公開することはありません。',
-    ],
+    p: ['お問い合わせへの回答、お見積り、ご依頼いただいた工事に関するご連絡のために利用します。'],
   },
   {
     h: '4. 第三者への提供',
     p: [
-      '法令に基づく場合を除き、お客様の同意なく第三者に提供しません。施工に必要な範囲で、グリーンプランニング本部および協力会社と情報を共有することがあります。',
-      'フォームの送信には外部のメール配信サービスを利用しており、送信内容は当店へのメール送信のために同サービスを経由します。',
+      '法令に基づく場合を除き、お客様の同意なく第三者に提供しません。',
+      'フォームの送信には外部のメール配信サービスを利用しており、送信内容はメール送信のために同サービスを経由します。',
     ],
   },
   {
@@ -48,14 +50,10 @@ const sections = [
   },
   {
     h: '6. 開示・訂正・削除',
-    p: ['ご本人からの開示・訂正・削除のご希望には、ご本人であることを確認のうえ対応します。下記の連絡先までご連絡ください。'],
+    p: ['ご本人からの開示・訂正・削除のご希望には、ご本人であることを確認のうえ対応します。下記の窓口までご連絡ください。'],
   },
   {
-    h: '7. アクセス解析',
-    p: ['本サイトでは、Google Analyticsなどのアクセス解析ツールを利用する場合があります。これらのツールはCookieを利用して閲覧情報を収集しますが、個人を特定する情報は含まれません。'],
-  },
-  {
-    h: '8. お問い合わせ窓口',
+    h: '7. お問い合わせ窓口',
     p: [`${shop.name}／電話 ${shop.tel}（${shop.hours.label}）／メール ${shop.email}`],
   },
 ];
@@ -67,7 +65,9 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-[44rem]">
           <Breadcrumbs crumbs={crumbs} />
           <h1 className="display mt-8 text-[1.7rem] sm:text-[2.2rem]">個人情報保護方針</h1>
-          <p className="mt-5 text-[0.92rem] leading-[2] text-sumi-2">制定日：2026年9月6日</p>
+          <div className="mt-6">
+            <Pending block>内容が静岡EASTの実際の運用と合っているか、制定日</Pending>
+          </div>
           <div className="mt-10 space-y-10">
             {sections.map((s) => (
               <section key={s.h}>

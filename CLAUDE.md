@@ -1,123 +1,75 @@
-# グリーンプランニング静岡EAST 公式サイト — このリポジトリで作業するときの決まり
+# グリーンプランニング静岡EAST 独自サイト — このリポジトリで作業するときの決まり
 
-静岡県沼津市の実在する人工芝専門店「人工芝専門店グリーンプランニング静岡EAST」の公式サイトです。
-ルートの `c:\projects\CLAUDE.md` に加えて、ここのルールを守ってください。
+静岡県沼津市の実在する人工芝専門店「人工芝専門店グリーンプランニング静岡EAST」の独自Webサイトです。
+静岡EASTはフランチャイズ本部（人工芝専門店グリーンプランニング）のパートナーです。
+ルートの `c:\projects\CLAUDE.md` に加えてここのルールを守ってください。**両者が食い違うときは、ここ（本部チェックリスト）が優先です。**
+ルート側の「ブランドストーリー・お客様の声・FAQ・実績の数字を盛り込む」といった既定の構成は、根拠となる静岡EAST自身の情報がない限り適用しません。
 
-## 最優先のルール：確認できていないことは書かない
+## 最優先：本部チェックリスト「独自Webサイト・SNS運用チェックリスト」
 
-このサイトの一次情報は次の3つだけです。
+2026年9月、本部から「本部サイトの文章・画像のコピーや言い換え、同じページ構成がある」との指摘を受け、該当する内容をすべて削除しました。
+チェックリストの原本は本部の内部資料なので、リポジトリには入れていません（`.gitignore` 済み）。要点は次のとおりです。
 
-1. 本部公式サイト <https://greenplanning.jp/>（静岡EASTページ、商品ページ、FAQ、施工実績、参考価格）
-2. 公式Instagram <https://www.instagram.com/green_shizuoka/>
-3. 本部サイトに掲載された静岡EASTの施工写真・代表写真（`assets/originals` → `public/photos`）
+| 項目 | してよいこと | してはいけないこと |
+| --- | --- | --- |
+| 画像 | 静岡EASTが撮影し使用許諾を得た写真／本部が使用可として提供・指定した画像 | 本部公式サイト・他サイトから保存して転載 |
+| 文章 | 地域性・静岡EASTの強み・実際のサービス内容をもとに人が独自に作成 | 本部の文章のコピー・転載（商品説明・参考価格・施工の説明など） |
+| AIの利用 | 静岡EASTが考えた独自情報の整理・校正などの補助 | 本部の文章をAIに読み込ませて言い換え・リライトして掲載 |
+| コンテンツ構成 | 静岡EASTの経験・地域事情・施工事例・実際に聞かれる質問を人が企画 | 本部と同じ構成・テーマ（庭・ドッグラン・ゴルフ・マンション・ベランダ・商品・よくある質問 などの分類） |
+| 実績・参考価格 | 載せるなら「本部公式情報」「グリーンプランニング全体の実績」と明記 | 静岡EAST自身の実績・価格のように見せる |
+| 施工実績 | 静岡EASTの事例か本部の事例かを明確にする | 区別のない掲載 |
+| タイトル・H1 | 担当エリア「静岡県東部・中部・伊豆」。「静岡県の人工芝施工」は現状可（他加盟店の出店時は変更） | |
+| 本部との関係 | 代表挨拶・会社概要・店舗紹介に本部指定のパートナー区分を明記 | 本部直営・本部公式と誤認される表現 |
+| ロゴ | 本部指定の専用ロゴを指定どおり使う | 切り抜き・透過・色変更・文字追加・合成など独自の変更 |
+| 有料Web広告 | 本部が一括管理 | 静岡EAST側で出稿する（広告タグ・LP制作もしない） |
+| 本部公式へのリンク | 会社概要・本部紹介からの自然なリンク | ヘッダー・フッターなど全ページ共通部分へのリンク、「監修」枠 |
+| 公開・大幅変更 | 公開前に本部の確認・承認を得る | 承認前の公開 |
+| 掲載内容 | 人が事実確認した内容 | 確認していないAI生成文 |
 
-**ここにないことは、画面にもコラムにも書かないでください。** とくに次は禁止です。
+### 作業するときの具体的な決まり
 
-- 架空の施工事例（確認できている静岡EASTの事例は `src/data/works.ts` の田方郡の1件のみ）
-- 架空のお客様の声・口コミ・評価・受賞歴
-- 本部公式にない価格・数値・性能（参考価格3例と材料価格のみ書ける）
-- 「地域No.1」「最安」「絶対に生えない」「100%安全」などの根拠のない断定
-- 本部サイトの文章のコピー（事実は使ってよいが、文章はすべて独自に書く）
-- ブランド共通の写真（庭・ドッグラン・ゴルフ等）に「静岡で施工」と書くこと（alt も本文も）
+- **文章を作文しない。** 静岡EASTから届いた文章・事実だけを載せる。届いていない箇所は `components/ui/Pending.tsx`（黄色の「要確認」）で置き、それらしい文章で埋めない
+- 本部サイト（greenplanning.jp）の文章・画像を取得して参考にしたり、AIで言い換えたりしない
+- 本部の数値（施工件数・施工面積・保証年数・耐用年数・参考価格・商品仕様）を載せない。載せる必要があるときは本部の確認を取り、「本部公式情報」と明記する
+- 写真には出典を表示する（`src/data/photos.ts` の `credit`）。静岡EASTの施工と確認できていない写真に地域名や「静岡EASTの施工」と書かない
+- ページを増やすときは、本部サイトと同じ分類にならないか確認する。大きな変更は公開前に本部の承認が要る
+- 本部から受け取った資料・画像の原本、ヒアリング内容は `_internal/`・`assets/` に置き、コミットしない
 
-正式な一覧は `src/data/verified-facts.json` の `facts` と `forbidden` にあります。**新しい事実（施工事例・価格改定など）が確認できたら、まずこのファイルと該当する data ファイルを直してください。** コラムの自動生成もここだけを見ています。
+## 公開の仕組み（現在は非公開）
 
-## 店舗情報の直し方
-
-住所・電話・営業時間・メール・Instagram は **`src/data/shop.ts` だけ** を直します。ヘッダー・フッター・各ページ・構造化データ・`llms.txt`・RSS まで一度に反映されます。同じ値を他の場所に直接書かないでください。
-
-本部公式の数値（1,300件・40,000㎡・5年品質保証・1年施工保証・耐久性約7〜10年）は `shop.brandFacts` にあります。本部サイトで更新があれば、ここと `verified-facts.json` を直します。
+- 本番環境は `src/proxy.ts` で Basic 認証。`BASIC_AUTH_USER` / `BASIC_AUTH_PASSWORD` が無い本番環境は 401 で閉じる
+- `NEXT_PUBLIC_ALLOW_INDEXING` が `true` 以外のあいだは、Basic 認証・meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag` がすべて非公開側。**どれか1つだけを直さない**
+- `true` にしても、`HQ_APPROVAL_NOTE`（本部の承認記録）が空、`shop.partnerCategory` が null、または「要確認」が画面に残っていればビルドが失敗する（`src/lib/publish-guard.ts`・`Pending.tsx`）。**このガードを外さない**
+- Basic 認証中は `/_next/image` が元画像を取得できないため、写真は `unoptimized` で配信する（`scripts/prepare-images.mjs` で圧縮済み）
 
 ## データの置き場所
 
 | 内容 | ファイル |
 | --- | --- |
-| 用途別サービスページ（/dogrun 等 11ページ） | `src/data/services.ts` |
-| 検索意図別ガイド（/price 等 8ページ） | `src/data/guides.ts`（本文はMarkdown） |
-| 商品（7点） | `src/data/products.ts`（仕様・価格は本部公式から） |
-| 施工事例 | `src/data/works.ts`（静岡EASTの事例のみ） |
-| 対応エリア・地域ページ（9ページ） | `src/data/areas.ts` |
-| FAQ | `src/data/faq.ts` |
-| 写真の実寸と alt | `src/data/photos.ts` |
+| 店舗情報（NAP・パートナー区分・担当エリア・事業内容・本部URL） | `src/data/shop.ts`（ここだけを直す） |
+| 担当エリアの市町 | `src/data/areas.ts` |
+| 写真（実寸・alt・出典） | `src/data/photos.ts` |
 | ナビ | `src/data/nav.ts` |
 
-サービス・ガイドは `src/app/[slug]/page.tsx` の1つの動的ルートで描画しています。ページを足すときは data に1件追加し、`src/data/nav.ts` と `scripts/topics.mjs` の `validPaths` にもパスを足してください。
+本部公式サイトへのリンクは `components/ui/ShopInfoTable.tsx` の「本部との関係」の行（`/about` の会社概要）だけ。
 
-## 地域ページの決まり
+## ロゴ・画像
 
-「市名だけ入れ替えた量産ページ」を作らないこと。地域ページはその地域について書けること（地形・気候・住宅事情）がある市町にだけ作ります。施工実績が確認できていない市町に事例を書かないこと。伊豆の各市町は `/area/izu` の1ページにまとめています。
+- ロゴは `public/brand/logo-shizuoka-east.jpg`（本部指定の静岡EAST専用ロゴ）を `unoptimized` で無加工のまま表示する。背景の透過・トリミング・OG画像との合成をしない
+- ファビコンは本部提供のアイコンを無加工でコピーした `src/app/icon.png` / `apple-icon.png`
+- 提供画像は受け取ったときのファイル名と中身が一致していなかったため、中身に合わせて名前を付け直している（対応表は `assets/provided/README.md`、非コミット）
 
-## 施工事例を足すとき
+## 書き方・デザイン
 
-1. 写真を `assets/originals` に置き、`scripts/prepare-images.mjs` の MAP に追加して実行
-2. `src/data/photos.ts` に実寸と alt（静岡での施工と確認できたものだけ地域名を入れる）
-3. `src/data/works.ts` に1件追加（施工地域・面積・下地・工期・商品・悩み・提案・工程・施工後）
-4. 該当する `src/data/areas.ts` の `workSlugs` に slug を追加
-5. `scripts/topics.mjs` の `validPaths` に `/works/<slug>` を追加
-
-## 書き方
-
-- 敬体（です・ます）。一文は60文字を目安に短く
-- 売り込みすぎない。「人工芝を敷く」ではなく「庭で何をしたいか」から書く
-- 商品性能・保証・耐用年数・安全性は断定しすぎない（「目安」「条件による」）
-- 検索キーワードの不自然な詰め込みは禁止。title / h1 / h2 / 本文 / FAQ / 内部リンクへ自然に分散させる
-- 「当店」は使わない（「静岡EAST」「グリーンプランニング静岡EAST」）
-
-## デザイン
-
-- 白ベース（`--color-shiro`）に芝のグリーン（`--color-shiba`）、深い緑（`--color-fukami`）、生成り（`--color-kinari`）
-- 写真を大きく、余白を広く、線は細く（`border-sen`）。角丸カード・グラデーション・巨大な数字カード・意味のない英語見出しは使わない
-- 見出しは自前ホストの Zen Kaku Gothic New（`.display`）、本文は端末標準のゴシック
-- 元写真が800px幅までしかないため、写真を画面幅いっぱいに引き伸ばさない（分割レイアウトにする）
-
-### Tailwind v4 の注意
-
-カスタムクラスは必ず `@layer components` の中に書いてください。`globals.css` に素で書くとユーティリティを打ち消します。
-
-### アニメーション
-
-`Reveal` コンポーネント（IntersectionObserver + CSS）だけを使います。隠すスタイルは `html.js` の下でのみ効くので、JSが無効でも本文は見えます。`prefers-reduced-motion` で全部止まります。ライブラリを足さないでください。
-
-## フォント
-
-`next/font/google` に日本語フォントを渡してはいけません（unicode-range 分割の @font-face が数百個入り、レンダリングブロックCSSが数百KBになります）。見出しフォントは `npm run fonts:fetch` で `public/fonts` に落とし、`layout.tsx` の inline script から非同期に読み込んでいます。
-
-## ロゴ・ファビコン
-
-- 元データは `public/logo.jpg`（本部ブランドロゴ：犬のイラスト＋Green Planning）。`npm run brand:make` で `public/brand/logo.png`（白を透過）・`logo-mark.png`・`src/app/icon.png`・`apple-icon.png`・`public/icon-192/512.png`・`public/og.jpg`（写真＋ロゴ）を生成する
-- ヘッダーとフッターは `components/layout/Logo.tsx`。透過ロゴは白〜生成りの背景でだけ使う（濃い緑の上では犬の白い部分が透ける）
-- ロゴを差し替えるときは `public/logo.jpg` を置き換えて `npm run brand:make` を実行する
-
-## 画像
-
-- **写真を指定するフィールドは必ず `PhotoKey` 型にする。** `string` にすると綴りを間違えても型で気づけず、`getPhoto()` が既定の写真に差し替えてしまう（実際に地域ページ4件がこれで同じ写真になっていた）。型で縛れないのはブログのフロントマターの `eyecatch` だけで、そこは生成スクリプト側で検証している
-- **写真は「写っているもの」と使う文脈を合わせる。** マンション専用庭の写真を法人・施設ページに使うといった転用をしない。合う写真がなければ、内容を限定しない写真（`gardenFlowerbedWide` や `turfRollsWide`）を使う
-- 必ず `components/ui/Photo.tsx` を使う。`fill` のときは親に `relative` と高さを持たせる
-- `quality` は `next.config.ts` の `images.qualities`（62 / 70 / 78）にある値だけ
-- 実寸は `src/data/photos.ts` に持たせる（CLS対策）
-- 本部トップのAI生成風イメージ画像（main_pc2026 / area_head / cta_bg / bg_security）は使わない
-
-## 検索エンジンへの公開（現在は非公開）
-
-インデックスの可否は `NEXT_PUBLIC_ALLOW_INDEXING` の1つで決まります（`src/lib/site.ts` の `allowIndexing`）。**既定は非公開**で、`true` を明示したときだけ公開になります。`NEXT_PUBLIC_SITE_URL` も必要です。
-
-false のときは、meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag`（`next.config.ts`）の4つが同時に非公開側になります。**どれか1つだけを直さないでください。** 画像やRSSは meta タグを置けないので、`X-Robots-Tag` が無いと検索結果に残ります。
-
-`isPublic`（＝`NEXT_PUBLIC_SITE_URL` の有無）は canonical / OG の出し分け専用です。インデックスの判定に使わないでください。
-
-## 構造化データ
-
-- `FAQPage` には**画面に出している質問と同じ内容だけ**を渡す
-- `HomeAndConstructionBusiness` は `LocalBusiness` の下位型。両方を別々に出さない
-- レビューが無いので `AggregateRating` は出さない。価格は施工料別のため `Product` に `offers` を出さない
+- 敬体（です・ます）。根拠のない断定（No.1・最安・無料・絶対 等）をしない。「当店」は使わない
+- 白ベース（`--color-shiro`）、芝のグリーン（`--color-shiba`）、深い緑（`--color-fukami`）、生成り（`--color-kinari`）。線は細く（`border-sen`）
+- Tailwind v4 のカスタムクラスは必ず `@layer components` の中に書く
+- アニメーションは `Reveal`（IntersectionObserver + CSS）だけ。ライブラリを足さない
+- `next/font/google` に日本語フォントを渡さない（見出しフォントは `npm run fonts:fetch` で自前ホスト）
 
 ## フォーム
 
-`/estimate`（写真見積り）と `/contact` は `src/app/api/inquiry/route.ts` に送信し、Resend の REST API でメールを送ります。`RESEND_API_KEY` が無いと 503 を返し、画面は電話・メールの案内に切り替わります。写真は送信前にブラウザで縮小しています（Vercel の本文サイズ上限 4.5MB のため）。
-
-## コラム（ブログ）
-
-`content/blog/*.md` を GitHub Actions（毎朝 9:30 JST）が1本ずつ足します。`scripts/generate-blog-post.mjs` の検証は、価格・施工事例・誇張表現・内部リンク・類似度を機械的に弾きます。トピックは `scripts/topics.mjs`。用途ページ・ガイドページと同じクエリを狙わないこと。
+`/contact` は `src/app/api/inquiry/route.ts` に送信し、Resend の REST API でメールを送る。`RESEND_API_KEY` が無いと 503 を返し、画面は電話・メールの案内に切り替わる。
 
 ## 変更したら
 
@@ -125,4 +77,4 @@ false のときは、meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag`
 npm run typecheck && npm run lint && NEXT_PUBLIC_SITE_URL=https://example.com npm run build
 ```
 
-3つとも通ることを確認してからコミットしてください。
+3つとも通ることを確認してからコミットする。

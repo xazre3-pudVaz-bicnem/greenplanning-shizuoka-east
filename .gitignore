@@ -7,5 +7,10 @@ next-env.d.ts
 .env.local
 .env.*.local
 .vercel
-assets/originals
+/assets/
 .DS_Store
+
+# 本部・加盟店から受け取った内部資料（公開リポジトリに載せない）
+/独自Webサイト・SNS運用チェックリスト_静岡EAST.pdf
+/*.pdf
+/_internal/

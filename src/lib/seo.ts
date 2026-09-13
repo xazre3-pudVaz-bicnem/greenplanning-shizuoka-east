@@ -6,39 +6,27 @@ type BuildMetaArgs = {
   /** ページ固有のタイトル（サイト名はテンプレートで自動的に付きます） */
   title: string;
   description: string;
-  /** '/dogrun' のようなパス */
+  /** '/about' のようなパス */
   path: string;
-  /** OG画像に使う絶対パス。省略時はサイト共通の /og.jpg */
+  /**
+   * OG画像に使う絶対パス。省略時は出しません。
+   * 本部指定のロゴや提供画像を加工・合成したOG画像は作らないこと（本部チェックリスト「ブランド名・ロゴの使用」）。
+   */
   ogImage?: string;
-  ogType?: 'website' | 'article';
-  publishedTime?: string;
-  modifiedTime?: string;
   noindex?: boolean;
-  keywords?: string[];
 };
 
 /**
  * ページごとの metadata を組み立てます。
  * canonical / OG / Twitter は本番URLが設定されているときだけ出力します。
  */
-export function buildMetadata({
-  title,
-  description,
-  path,
-  ogImage = '/og.jpg',
-  ogType = 'website',
-  publishedTime,
-  modifiedTime,
-  noindex = false,
-  keywords,
-}: BuildMetaArgs): Metadata {
+export function buildMetadata({ title, description, path, ogImage, noindex = false }: BuildMetaArgs): Metadata {
   const canonical = absoluteUrl(path);
-  const image = absoluteUrl(ogImage);
+  const image = ogImage ? absoluteUrl(ogImage) : null;
 
   const meta: Metadata = {
     title,
     description,
-    ...(keywords && keywords.length ? { keywords } : {}),
     robots:
       noindex || !allowIndexing
         ? { index: false, follow: false }
@@ -48,20 +36,19 @@ export function buildMetadata({
   if (canonical) {
     meta.alternates = { canonical };
     meta.openGraph = {
-      type: ogType,
+      type: 'website',
       title: `${title}｜${shop.shortName}`,
       description,
       url: canonical,
       siteName,
       locale: 'ja_JP',
-      images: image ? [{ url: image, width: 1200, height: 630, alt: shop.name }] : undefined,
-      ...(ogType === 'article' ? { publishedTime, modifiedTime } : {}),
+      ...(image ? { images: [{ url: image, alt: shop.name }] } : {}),
     };
     meta.twitter = {
-      card: 'summary_large_image',
+      card: image ? 'summary_large_image' : 'summary',
       title: `${title}｜${shop.shortName}`,
       description,
-      images: image ? [image] : undefined,
+      ...(image ? { images: [image] } : {}),
     };
   }
 

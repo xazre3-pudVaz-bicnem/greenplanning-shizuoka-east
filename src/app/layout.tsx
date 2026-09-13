@@ -7,9 +7,13 @@ import Footer from '@/components/layout/Footer';
 import MobileBar from '@/components/layout/MobileBar';
 import JsonLd from '@/components/ui/JsonLd';
 import RevealObserver from '@/components/ui/RevealObserver';
-import { localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/jsonld';
+import { localBusinessJsonLd, websiteJsonLd } from '@/lib/jsonld';
+import { assertPublishable } from '@/lib/publish-guard';
 import { allowIndexing, defaultDescription, gaId, gscVerification, homeTitle, isPublic, siteName, siteUrl } from '@/lib/site';
 import { shop } from '@/data/shop';
+
+// 本部の承認記録などがそろっていないのに公開しようとしたら、ここでビルドを止める
+assertPublishable();
 
 /*
  * フォントの方針
@@ -30,9 +34,6 @@ export const metadata: Metadata = {
   },
   description: defaultDescription,
   applicationName: shop.shortName,
-  authors: [{ name: shop.name }],
-  creator: shop.name,
-  publisher: shop.name,
   formatDetection: { telephone: true, address: false, email: false },
   robots: allowIndexing
     ? { index: true, follow: true, 'max-image-preview': 'large' }
@@ -47,12 +48,8 @@ export const metadata: Metadata = {
           url: siteUrl!,
           title: homeTitle,
           description: defaultDescription,
-          images: [{ url: '/og.jpg', width: 1200, height: 630, alt: shop.name }],
         },
-        twitter: { card: 'summary_large_image', images: ['/og.jpg'] },
-        alternates: {
-          types: { 'application/rss+xml': `${siteUrl}/feed.xml` },
-        },
+        twitter: { card: 'summary' },
       }
     : {}),
 };
@@ -77,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/*
           1. JSが動く環境でだけ <html> に .js を付ける（.reveal はこのクラスの下でだけ要素を隠す）。
           2. 見出しフォントのCSSは、幅1024px以上（PC）でだけ、media="print" で足して読み終わってから media="all" にする。
-             スマホは端末標準のゴシックに任せ、フォントCSS（約100KB）のダウンロードそのものを省く（モバイルのFCP/LCPのため）。
         */}
         <script
           dangerouslySetInnerHTML={{
@@ -98,7 +94,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MobileBar />
         <RevealObserver />
         <JsonLd data={localBusinessJsonLd()} />
-        <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         {gaId && (
           <>

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { shop } from '@/data/shop';
 
 /**
- * お問い合わせ・写真見積りフォームの送信先。
+ * お問い合わせフォームの送信先。
  *
  * メールは Resend（https://resend.com）の REST API で送ります。SDKは足していません。
  * 環境変数 RESEND_API_KEY が無いときは 503 を返し、画面側で電話・メールの案内に切り替えます。
@@ -37,34 +37,24 @@ export async function POST(req: Request) {
   // honeypot: 人には見えない欄が埋まっていたら、成功したふりをして捨てる
   if (str(form, 'website')) return NextResponse.json({ ok: true });
 
-  const kind = str(form, 'kind') === 'estimate' ? 'estimate' : 'contact';
   const name = str(form, 'name', 100);
   const city = str(form, 'city', 100);
   const tel = str(form, 'tel', 40);
   const email = str(form, 'email', 200);
+  const message = str(form, 'message', 4000);
   const consent = str(form, 'consent');
 
-  if (!name || !city || !tel || !email) return bad('必須項目が入力されていません。');
+  if (!name || !city || !tel || !email || !message) return bad('必須項目が入力されていません。');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return bad('メールアドレスの形式を確認してください。');
   if (!consent) return bad('個人情報保護方針への同意が必要です。');
 
   const lines: string[] = [];
-  lines.push(kind === 'estimate' ? '【写真見積りの依頼】' : '【お問い合わせ】', '');
+  lines.push('【お問い合わせ】', '');
   lines.push(`お名前: ${name}`);
   lines.push(`市町村: ${city}`);
   lines.push(`電話番号: ${tel}`);
   lines.push(`メール: ${email}`);
-
-  if (kind === 'estimate') {
-    lines.push(`施工場所: ${str(form, 'place', 100)}`);
-    lines.push(`おおよその広さ: ${str(form, 'size', 200) || '（未記入）'}`);
-    lines.push(`現在の状態: ${str(form, 'condition', 100)}`);
-    lines.push(`用途: ${str(form, 'purpose', 100)}`);
-  } else {
-    lines.push(`ご相談の種類: ${str(form, 'type', 100)}`);
-    lines.push(`サンプル: ${str(form, 'sample', 20) || '希望なし'}`);
-  }
-  lines.push('', 'ご要望・ご相談内容:', str(form, 'message', 4000) || '（未記入）');
+  lines.push('', 'お問い合わせ内容:', message);
   lines.push('', `送信日時: ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}`);
 
   // 写真（画像のみ・枚数と容量を制限）
@@ -91,7 +81,7 @@ export async function POST(req: Request) {
 
   const from = process.env.MAIL_FROM?.trim() || 'onboarding@resend.dev';
   const to = process.env.MAIL_TO?.trim() || shop.email;
-  const subject = `${kind === 'estimate' ? '写真見積り' : 'お問い合わせ'}：${name}様（${city}）`;
+  const subject = `お問い合わせ：${name}様（${city}）`;
 
   try {
     const res = await fetch('https://api.resend.com/emails', {

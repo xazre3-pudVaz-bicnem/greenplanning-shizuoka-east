@@ -9,19 +9,14 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "fonts:fetch": "node scripts/fetch-fonts.mjs",
-    "images:prepare": "node scripts/prepare-images.mjs",
-    "brand:make": "node scripts/make-brand.mjs",
-    "blog:generate": "node scripts/generate-blog-post.mjs"
+    "images:prepare": "node scripts/prepare-images.mjs"
   },
   "dependencies": {
-    "gray-matter": "^4.0.3",
     "next": "^16.3.2",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "server-only": "^0.0.1"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@anthropic-ai/sdk": "^0.120.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",

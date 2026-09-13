@@ -346,123 +346,32 @@ body {
     white-space: nowrap;
   }
 
-  /* ── 記事本文 ─────────────────────────── */
-  .prose-gp {
-    font-size: 1rem;
-    line-height: 2;
+  /*
+   * 「要確認」の目印（components/ui/Pending.tsx）。
+   * 静岡EASTに確認・作成してもらう箇所を、確認用の画面で一目で分かるようにする。
+   */
+  .pending {
+    background: #fff6d6;
+    border: 1px dashed #c9a227;
+    color: #5a4a12;
+    padding: 0.15em 0.5em;
+    border-radius: 2px;
+    line-height: 1.9;
   }
 
-  .prose-gp > * + * {
-    margin-top: 1.35em;
+  .pending.block {
+    padding: 0.9rem 1rem;
   }
 
-  .prose-gp h2 {
-    font-family: var(--font-heading);
-    font-size: 1.32rem;
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: 0.04em;
-    margin-top: 3rem;
-    padding-left: 1rem;
-    border-left: 3px solid var(--color-shiba);
-  }
-
-  .prose-gp h3 {
-    font-family: var(--font-heading);
-    font-size: 1.08rem;
-    font-weight: 500;
-    margin-top: 2.2rem;
-  }
-
-  .prose-gp ul,
-  .prose-gp ol {
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .prose-gp li {
-    position: relative;
-    padding-left: 1.2em;
-  }
-
-  .prose-gp li + li {
-    margin-top: 0.45em;
-  }
-
-  .prose-gp ul li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.95em;
-    width: 0.5em;
-    height: 1px;
-    background: var(--color-shiba);
-  }
-
-  .prose-gp ol {
-    counter-reset: item;
-  }
-
-  .prose-gp ol li {
-    padding-left: 1.7em;
-    counter-increment: item;
-  }
-
-  .prose-gp ol li::before {
-    content: counter(item) '.';
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-family: var(--font-heading);
-    color: var(--color-fukami);
-    font-weight: 500;
-  }
-
-  .prose-gp a {
-    color: var(--color-fukami);
-    text-decoration-line: underline;
-    text-underline-offset: 0.28em;
-    text-decoration-thickness: 1px;
-    /* 行内リンクの上下パディングは行送りに影響せず、タップ領域だけ広がる */
-    padding: 0.2em 0;
-  }
-
-  .prose-gp blockquote {
-    border-left: 2px solid var(--color-shiba);
-    padding-left: 1.2rem;
-    color: var(--color-sumi-2);
-  }
-
-  .prose-gp strong {
-    font-weight: 600;
-    background: linear-gradient(transparent 64%, var(--color-wakaba-2) 64%);
-  }
-
-  .prose-gp hr {
-    border: 0;
-    border-top: 1px solid var(--color-sen);
-  }
-
-  .prose-gp table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-
-  .prose-gp th,
-  .prose-gp td {
-    padding: 0.7rem 0.75rem;
-    border-bottom: 1px solid var(--color-sen);
-    text-align: left;
-    vertical-align: top;
-    white-space: nowrap;
-  }
-
-  .prose-gp th {
-    font-weight: 500;
-    color: var(--color-hai);
-    border-bottom-color: var(--color-sen-2);
+  .pending-label {
+    display: inline-block;
+    margin-right: 0.5em;
+    padding: 0 0.4em;
+    background: #6b5200;
+    color: #fff;
+    font-size: 0.72em;
+    letter-spacing: 0.08em;
+    vertical-align: 0.12em;
   }
 
   /*
@@ -481,11 +390,6 @@ body {
       rgb(31 90 52 / 0.035) 0 1px,
       transparent 1px 7px
     );
-  }
-
-  /* Before / After スライダーのつまみ */
-  .ba-handle {
-    box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
   }
 }
 
