@@ -46,3 +46,17 @@ const allWorks: Work[] = [
 ];
 
 export const works = allWorks.filter((w) => w.permission);
+
+/** 見出し・タイトル用の短い地域名（「静岡県」を省く） */
+export function workAreaShort(work: Work) {
+  return work.area.replace(/^静岡県/, '');
+}
+
+/** ページタイトル。事実（地域・場所・広さ）だけで組み立てる */
+export function workTitle(work: Work) {
+  return `${workAreaShort(work)}・${work.place}の人工芝施工事例（${work.size}）`;
+}
+
+export function getWork(slug: string) {
+  return works.find((w) => w.slug === slug);
+}

@@ -6,13 +6,15 @@ import Reveal from '@/components/ui/Reveal';
 import ShopInfoTable from '@/components/ui/ShopInfoTable';
 import InquiryForm from '@/components/forms/InquiryForm';
 import { InstagramIcon, MailIcon, PhoneIcon } from '@/components/ui/icons';
-import { breadcrumbJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
 
+const description = `${shop.name}へのお問い合わせ。電話 ${shop.tel}（${shop.hours.label}）、メール、お問い合わせフォームで受け付けています。写真の添付もできます。`;
+
 export const metadata: Metadata = buildMetadata({
   title: 'お問い合わせ',
-  description: `${shop.name}へのお問い合わせ。電話 ${shop.tel}（${shop.hours.label}）、メール、お問い合わせフォームで受け付けています。`,
+  description,
   path: '/contact',
 });
 
@@ -83,6 +85,7 @@ export default function ContactPage() {
       </section>
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={webPageJsonLd({ type: 'ContactPage', name: 'お問い合わせ', description, path: '/contact' })} />
     </>
   );
 }

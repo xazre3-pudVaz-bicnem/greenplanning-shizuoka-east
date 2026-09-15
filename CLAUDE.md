@@ -41,7 +41,7 @@
 - 本番環境は `src/proxy.ts` で Basic 認証。`BASIC_AUTH_USER` / `BASIC_AUTH_PASSWORD` が無い本番環境は 401 で閉じる
 - `NEXT_PUBLIC_ALLOW_INDEXING` が `true` 以外のあいだは、Basic 認証・meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag` がすべて非公開側。**どれか1つだけを直さない**
 - `true` にしても、`HQ_APPROVAL_NOTE`（本部の承認記録）が空、`shop.partnerCategory` が null、または「要確認」が画面に残っていればビルドが失敗する（`src/lib/publish-guard.ts`・`Pending.tsx`）。**このガードを外さない**
-- Basic 認証中は `/_next/image` が元画像を取得できないため、写真は `unoptimized` で配信する（`scripts/prepare-images.mjs` で圧縮済み）
+- 写真は必ず `components/ui/Photo.tsx` で表示する。Basic 認証中は `/_next/image` が元画像を取得できないため `unoptimized` で配信し（`scripts/prepare-images.mjs` で圧縮済み）、公開後は自動で最適化配信に切り替わる
 
 ## データの置き場所
 
@@ -50,7 +50,7 @@
 | 店舗情報（NAP・パートナー区分・担当エリア・事業内容・本部URL） | `src/data/shop.ts`（ここだけを直す） |
 | 担当エリアの市町 | `src/data/areas.ts` |
 | オーナー様の言葉（始めたきっかけ・大事にしていること・代表挨拶） | `src/data/story.ts`（原文は `_internal/ヒアリング回答_*.md`） |
-| 施工事例（静岡EASTの施工・掲載許可ありのみ） | `src/data/works.ts` |
+| 施工事例（静岡EASTの施工・掲載許可ありのみ。1件ごとに `/works/[slug]`） | `src/data/works.ts`（写真の元データは `assets/own/works/`） |
 | 写真（実寸・alt・出典） | `src/data/photos.ts` |
 | ナビ | `src/data/nav.ts` |
 

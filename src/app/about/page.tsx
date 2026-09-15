@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import CtaBand from '@/components/ui/CtaBand';
 import GoogleMap from '@/components/ui/GoogleMap';
 import JsonLd from '@/components/ui/JsonLd';
 import Pending from '@/components/ui/Pending';
+import Photo from '@/components/ui/Photo';
 import Reveal from '@/components/ui/Reveal';
 import ShopInfoTable from '@/components/ui/ShopInfoTable';
-import { breadcrumbJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, personJsonLd, webPageJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
 import { greeting } from '@/data/story';
 import { photos } from '@/data/photos';
 
+const title = '代表挨拶・店舗情報';
+const description = `${shop.name}（${shop.hq.name}の${shop.partnerCategory ?? 'パートナー'}）の代表挨拶・店舗情報・会社概要。所在地は${shop.address.full}。担当エリアは${shop.areaLabel}。代表は${shop.representative}。`;
+
 export const metadata: Metadata = buildMetadata({
-  title: '代表挨拶・店舗情報',
-  description: `${shop.name}の代表挨拶・店舗情報・会社概要。所在地は${shop.address.full}。担当エリアは${shop.areaLabel}。代表は${shop.representative}。`,
+  title,
+  description,
   path: '/about',
+  ogImage: photos.representative.src,
 });
 
 const crumbs = [
@@ -49,7 +53,7 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
           <figure className="mx-auto w-full max-w-[16rem] lg:mx-0 lg:max-w-none">
             <div className="relative aspect-square overflow-hidden bg-kinari">
-              <Image src={photos.representative.src} alt={photos.representative.alt} fill unoptimized className="object-cover" />
+              <Photo photo={photos.representative} sizes="(min-width: 1024px) 18rem, 16rem" />
             </div>
             <figcaption className="mt-3 text-center text-[0.85rem] text-sumi-2 lg:text-left">代表 {shop.representative}</figcaption>
           </figure>
@@ -105,6 +109,8 @@ export default function AboutPage() {
       <CtaBand id="about-cta" />
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={webPageJsonLd({ type: 'AboutPage', name: title, description, path: '/about' })} />
+      <JsonLd data={personJsonLd()} />
     </>
   );
 }

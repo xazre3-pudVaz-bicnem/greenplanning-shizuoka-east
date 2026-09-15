@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import CtaBand from '@/components/ui/CtaBand';
 import GoogleMap from '@/components/ui/GoogleMap';
 import Pending from '@/components/ui/Pending';
+import Photo from '@/components/ui/Photo';
 import Reveal from '@/components/ui/Reveal';
 import ShopInfoTable from '@/components/ui/ShopInfoTable';
 import WorkCase from '@/components/ui/WorkCase';
@@ -16,7 +16,7 @@ import { shop } from '@/data/shop';
 import { origin, values } from '@/data/story';
 import { works } from '@/data/works';
 
-const baseMeta = buildMetadata({ title: homeTitle, description: defaultDescription, path: '/' });
+const baseMeta = buildMetadata({ title: homeTitle, description: defaultDescription, path: '/', ogImage: photos.kannamiGardenAfter.src });
 
 export const metadata: Metadata = {
   ...baseMeta,
@@ -79,8 +79,7 @@ export default function HomePage() {
 
           <figure className="hero-photo">
             <div className="relative aspect-[4/3] overflow-hidden bg-kinari">
-              {/* Basic認証中は画像最適化（/_next/image）が元画像を取得できないため、scripts/prepare-images.mjs で圧縮済みのファイルをそのまま配信する */}
-              <Image src={hero.src} alt={hero.alt} fill priority unoptimized className="object-cover" />
+              <Photo photo={hero} sizes="(min-width: 1344px) 44rem, (min-width: 1024px) 52vw, 100vw" priority />
             </div>
             <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{hero.credit}</figcaption>
           </figure>
@@ -186,7 +185,7 @@ export default function HomePage() {
               return (
                 <Reveal as="li" key={key} delay={(i % 3) * 60}>
                   <div className="relative aspect-[4/3] overflow-hidden bg-kinari">
-                    <Image src={p.src} alt={p.alt} fill unoptimized className="object-cover" />
+                    <Photo photo={p} sizes="(min-width: 1024px) 27rem, 50vw" />
                   </div>
                 </Reveal>
               );
