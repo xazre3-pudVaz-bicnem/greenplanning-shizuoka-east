@@ -37,7 +37,10 @@ const allWorks: Work[] = [
     ingenuity:
       'もともと芝生のなかった配管口にも人工芝を施工し、全面をフラットな状態にして、今までよりもサッカーを楽しめる環境にしました。',
     permission: true,
-    photos: [],
+    photos: [
+      { photo: 'kannamiGardenBefore', caption: '施工前' },
+      { photo: 'kannamiGardenAfter', caption: '施工後' },
+    ],
     source: 'オーナー様ヒアリング（2026年9月15日）',
   },
 ];

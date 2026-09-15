@@ -27,7 +27,7 @@ export default function WorkCase({ work, compact = false, headingLevel = 'h2' }:
               return (
                 <li key={photo}>
                   <figure>
-                    <div className="relative aspect-[4/3] overflow-hidden bg-kinari-2">
+                    <div className="relative overflow-hidden bg-kinari-2" style={{ aspectRatio: `${p.width} / ${p.height}` }}>
                       <Image src={p.src} alt={p.alt} fill unoptimized className="object-cover" />
                     </div>
                     <figcaption className="mt-2 text-[0.76rem] leading-[1.7] text-hai">

@@ -10,7 +10,7 @@ import WorkCase from '@/components/ui/WorkCase';
 import { ArrowIcon } from '@/components/ui/icons';
 import { buildMetadata } from '@/lib/seo';
 import { defaultDescription, homeTitle } from '@/lib/site';
-import { photos } from '@/data/photos';
+import { galleryKeys, photos } from '@/data/photos';
 import { regions } from '@/data/areas';
 import { shop } from '@/data/shop';
 import { origin, values } from '@/data/story';
@@ -167,6 +167,31 @@ export default function HomePage() {
               <ArrowIcon />
             </Link>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="cv bg-shiro py-16 sm:py-20" aria-labelledby="gallery-heading">
+        <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
+          <Reveal variant="line">
+            <h2 id="gallery-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
+              人工芝のある風景
+            </h2>
+            <p className="mt-4 text-[0.85rem] leading-[1.9] text-hai">
+              グリーンプランニング本部から提供されたイメージ写真です。上の「静岡EASTの施工事例」とは別のものです。
+            </p>
+          </Reveal>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+            {galleryKeys.map((key, i) => {
+              const p = photos[key];
+              return (
+                <Reveal as="li" key={key} delay={(i % 3) * 60}>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-kinari">
+                    <Image src={p.src} alt={p.alt} fill unoptimized className="object-cover" />
+                  </div>
+                </Reveal>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

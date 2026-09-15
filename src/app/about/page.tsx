@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import CtaBand from '@/components/ui/CtaBand';
 import GoogleMap from '@/components/ui/GoogleMap';
@@ -10,6 +11,7 @@ import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
 import { greeting } from '@/data/story';
+import { photos } from '@/data/photos';
 
 export const metadata: Metadata = buildMetadata({
   title: '代表挨拶・店舗情報',
@@ -44,6 +46,13 @@ export default function AboutPage() {
 
       <section className="cv bg-shiro py-14 sm:py-20" aria-labelledby="greeting-heading">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+          <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
+          <figure className="mx-auto w-full max-w-[16rem] lg:mx-0 lg:max-w-none">
+            <div className="relative aspect-square overflow-hidden bg-kinari">
+              <Image src={photos.representative.src} alt={photos.representative.alt} fill unoptimized className="object-cover" />
+            </div>
+            <figcaption className="mt-3 text-center text-[0.85rem] text-sumi-2 lg:text-left">代表 {shop.representative}</figcaption>
+          </figure>
           <Reveal variant="line" className="max-w-[44rem]">
             <h2 id="greeting-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
               代表挨拶
@@ -67,6 +76,7 @@ export default function AboutPage() {
               代表 {shop.representative}
             </p>
           </Reveal>
+          </div>
         </div>
       </section>
 
