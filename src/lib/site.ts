@@ -55,7 +55,7 @@ export const siteName = shop.name;
 export const homeTitle = `静岡県の人工芝施工｜${shop.areaLabel}｜${shop.shortName}`;
 
 /** サイト共通のディスクリプション。店舗の事実だけで組み立てる */
-export const defaultDescription = `${shop.name}（${shop.address.prefecture}${shop.address.city}）。担当エリアは${shop.areaLabel}。人工芝の施工・販売・メンテナンス、造園・外構工事のご相談は、電話・メール・フォームで受け付けています。`;
+export const defaultDescription = `${shop.name}（${shop.address.prefecture}${shop.address.city}）。担当エリアは${shop.areaLabel}。人工芝の施工、人工芝材料の販売、人工芝のメンテナンスを行っています。ご相談は電話・メール・フォームで受け付けています。`;
 
 export const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || null;
 export const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim() || null;

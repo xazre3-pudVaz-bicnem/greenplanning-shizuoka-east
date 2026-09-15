@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import CtaBand from '@/components/ui/CtaBand';
 import JsonLd from '@/components/ui/JsonLd';
-import Pending from '@/components/ui/Pending';
 import Reveal from '@/components/ui/Reveal';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
@@ -12,7 +11,7 @@ import { shop } from '@/data/shop';
 export const metadata: Metadata = buildMetadata({
   title: `担当エリア｜${shop.areaLabel}`,
   description: `${shop.name}の担当エリアは${shop.areaLabel}です。${regions
-    .map((r) => `${r.label}（${r.municipalities.slice(0, 3).join('・')}ほか）`)
+    .map((r) => r.municipalities.length > 1 ? `${r.label}（${r.municipalities.slice(0, 3).join('・')}ほか）` : r.label)
     .join('、')}。`,
   path: '/area',
 });
@@ -56,9 +55,6 @@ export default function AreaPage() {
                 </ul>
               </Reveal>
             ))}
-          </div>
-          <div className="mt-10 max-w-[44rem]">
-            <Pending block>市町の一覧が実際の担当範囲と合っているか（静岡EASTで確認）</Pending>
           </div>
         </div>
       </section>

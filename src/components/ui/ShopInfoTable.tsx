@@ -35,6 +35,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
       ),
     },
     { label: '受付時間', value: shop.hours.label },
+    { label: '定休日', value: shop.hours.closedDays },
     {
       label: 'Instagram',
       value: (
@@ -47,17 +48,7 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
 
   if (!compact) {
     rows.push(
-      {
-        label: '事業内容',
-        value: (
-          <>
-            {shop.business.join('・')}
-            <span className="mt-2 block">
-              <Pending>事業内容の項目が実際の業務と合っているか</Pending>
-            </span>
-          </>
-        ),
-      },
+      { label: '事業内容', value: shop.business.join('・') },
       {
         label: '担当エリア',
         value: (
@@ -65,8 +56,14 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
             <span className="block">{shop.areaLabel}</span>
             {regions.map((r) => (
               <span key={r.key} className="block text-[0.86rem]">
-                <span className="text-hai">{r.label}：</span>
-                {r.municipalities.join('・')}
+                {r.municipalities.length > 1 ? (
+                    <>
+                      <span className="text-hai">{r.label}：</span>
+                      {r.municipalities.join('・')}
+                    </>
+                  ) : (
+                    r.label
+                  )}
               </span>
             ))}
           </span>

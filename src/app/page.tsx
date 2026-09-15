@@ -6,12 +6,15 @@ import GoogleMap from '@/components/ui/GoogleMap';
 import Pending from '@/components/ui/Pending';
 import Reveal from '@/components/ui/Reveal';
 import ShopInfoTable from '@/components/ui/ShopInfoTable';
+import WorkCase from '@/components/ui/WorkCase';
 import { ArrowIcon } from '@/components/ui/icons';
 import { buildMetadata } from '@/lib/seo';
 import { defaultDescription, homeTitle } from '@/lib/site';
 import { photos } from '@/data/photos';
 import { regions } from '@/data/areas';
 import { shop } from '@/data/shop';
+import { origin, values } from '@/data/story';
+import { works } from '@/data/works';
 
 const baseMeta = buildMetadata({ title: homeTitle, description: defaultDescription, path: '/' });
 
@@ -29,7 +32,8 @@ export const metadata: Metadata = {
  * 本部チェックリストに沿って、ここに置くのは次のものだけにしています。
  *   - 店舗の事実（店名・パートナー区分・担当エリア・事業内容・連絡先）
  *   - 本部が使用可として提供した写真（出典を表示）
- *   - 静岡EASTが自分で書く文章・施工事例の置き場所（届くまでは「要確認」の目印）
+ *   - 静岡EASTご本人の言葉（data/story.ts）と、静岡EASTの施工事例（data/works.ts）
+ *   - まだ届いていないもの（施工事例の写真など）は「要確認」の目印
  * 本部サイトと同じ分類（庭・ドッグラン・ゴルフ等）の構成、本部の実績数値・参考価格、
  * 本部の文章をもとにした説明文は置きません。
  */
@@ -57,18 +61,18 @@ export default function HomePage() {
               ／{shop.address.prefecture}
               {shop.address.city}
             </p>
-            <div className="hero-fade mt-7" style={{ ['--hero-delay' as string]: '0.5s' }}>
-              <Pending block>
-                静岡EASTの紹介文（静岡EASTで作成）。地域とのかかわり、得意なこと、実際に行っているサービスを、代表・スタッフの言葉で書いていただく欄です。
-              </Pending>
-            </div>
+            <ul className="hero-fade mt-7 space-y-1.5 border-l-2 border-shiba pl-4 text-[0.95rem] leading-[1.9] text-sumi" style={{ ['--hero-delay' as string]: '0.5s' }}>
+              {values.map((v) => (
+                <li key={v}>{v}</li>
+              ))}
+            </ul>
             <div className="hero-fade mt-9 flex flex-wrap items-center gap-x-8 gap-y-4" style={{ ['--hero-delay' as string]: '0.65s' }}>
               <Link href="/contact" className="rule-link text-fukami">
                 お問い合わせ
                 <ArrowIcon />
               </Link>
-              <Link href="/about" className="rule-link text-sumi-2">
-                店舗情報
+              <Link href="/works" className="rule-link text-sumi-2">
+                施工事例
               </Link>
             </div>
           </div>
@@ -80,6 +84,27 @@ export default function HomePage() {
             </div>
             <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{hero.credit}</figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section className="cv border-t border-sen bg-shiro py-16 sm:py-20" aria-labelledby="about-heading">
+        <div className="mx-auto grid max-w-[84rem] gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+          <Reveal variant="line">
+            <h2 id="about-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
+              静岡EASTについて
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="space-y-4 text-[0.98rem] leading-[2.05] text-sumi-2">
+              {origin.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
+            <Link href="/about" className="rule-link mt-7 text-fukami">
+              代表挨拶・店舗情報
+              <ArrowIcon />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -103,8 +128,14 @@ export default function HomePage() {
             <ul className="mt-3 space-y-1.5 text-[0.88rem] leading-[1.9] text-sumi-2">
               {regions.map((r) => (
                 <li key={r.key}>
-                  <span className="text-hai">{r.label}：</span>
-                  {r.municipalities.join('・')}
+                  {r.municipalities.length > 1 ? (
+                    <>
+                      <span className="text-hai">{r.label}：</span>
+                      {r.municipalities.join('・')}
+                    </>
+                  ) : (
+                    r.label
+                  )}
                 </li>
               ))}
             </ul>
@@ -118,15 +149,23 @@ export default function HomePage() {
 
       <section className="cv bg-kinari py-16 sm:py-20" aria-labelledby="works-heading">
         <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
-          <Reveal variant="line" className="max-w-[44rem]">
+          <Reveal variant="line">
             <h2 id="works-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
               静岡EASTの施工事例
             </h2>
-            <div className="mt-6">
-              <Pending block>
-                静岡EASTが施工した事例（施工地域・場所・施工前後の写真・お客様の掲載許可）。写真は静岡EASTで撮影し、お客様の許諾を得たものを使います。本部の施工実績は、ここに静岡EASTの実績として載せません。
-              </Pending>
-            </div>
+          </Reveal>
+          <div className="mt-10 space-y-12">
+            {works.map((w) => (
+              <Reveal key={w.slug}>
+                <WorkCase work={w} compact headingLevel="h3" />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <Link href="/works" className="rule-link mt-10 text-fukami">
+              施工事例を見る
+              <ArrowIcon />
+            </Link>
           </Reveal>
         </div>
       </section>

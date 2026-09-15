@@ -8,7 +8,8 @@
 export type NavLink = { href: string; label: string };
 
 export const mainNav: NavLink[] = [
-  { href: '/about', label: '店舗情報' },
+  { href: '/works', label: '施工事例' },
+  { href: '/about', label: '店舗情報・代表挨拶' },
   { href: '/area', label: '担当エリア' },
   { href: '/contact', label: 'お問い合わせ' },
 ];
