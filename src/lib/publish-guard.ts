@@ -18,6 +18,9 @@ export function assertPublishable() {
   if (!shop.partnerCategory) {
     problems.push('shop.partnerCategory（本部指定のパートナー区分）が未確定です');
   }
+  if (!shop.privacyPolicyDate) {
+    problems.push('shop.privacyPolicyDate（個人情報保護方針の制定日＝公開日）が未設定です');
+  }
 
   if (problems.length > 0) {
     throw new Error(`公開の条件がそろっていません。\n- ${problems.join('\n- ')}`);

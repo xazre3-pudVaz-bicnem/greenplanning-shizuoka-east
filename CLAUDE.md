@@ -40,7 +40,7 @@
 
 - 本番環境は `src/proxy.ts` で Basic 認証。`BASIC_AUTH_USER` / `BASIC_AUTH_PASSWORD` が無い本番環境は 401 で閉じる
 - `NEXT_PUBLIC_ALLOW_INDEXING` が `true` 以外のあいだは、Basic 認証・meta robots・`robots.txt`・`sitemap.xml`・`X-Robots-Tag` がすべて非公開側。**どれか1つだけを直さない**
-- `true` にしても、`HQ_APPROVAL_NOTE`（本部の承認記録）が空、`shop.partnerCategory` が null、または「要確認」が画面に残っていればビルドが失敗する（`src/lib/publish-guard.ts`・`Pending.tsx`）。**このガードを外さない**
+- `true` にしても、`HQ_APPROVAL_NOTE`（本部の承認記録）が空、`shop.partnerCategory` が null、`shop.privacyPolicyDate`（公開日）が null、または「要確認」が画面に残っていればビルドが失敗する（`src/lib/publish-guard.ts`・`Pending.tsx`）。**このガードを外さない**
 - 写真は必ず `components/ui/Photo.tsx` で表示する。Basic 認証中は `/_next/image` が元画像を取得できないため `unoptimized` で配信し（`scripts/prepare-images.mjs` で圧縮済み）、公開後は自動で最適化配信に切り替わる
 
 ## データの置き場所

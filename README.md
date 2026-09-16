@@ -35,7 +35,7 @@ npm run dev
 | --- | --- |
 | `NEXT_PUBLIC_ALLOW_INDEXING` が `true` 以外（既定） | Basic 認証（`src/proxy.ts`）と noindex・robots.txt Disallow・空の sitemap |
 | `BASIC_AUTH_USER` / `BASIC_AUTH_PASSWORD` が未設定の本番環境 | 誰も閲覧できない（401） |
-| `NEXT_PUBLIC_ALLOW_INDEXING=true` にしたが、`HQ_APPROVAL_NOTE` が空、パートナー区分が未確定、または画面に「要確認」が残っている | ビルドが失敗する |
+| `NEXT_PUBLIC_ALLOW_INDEXING=true` にしたが、`HQ_APPROVAL_NOTE` が空、パートナー区分が未確定、個人情報保護方針の制定日（公開日）が未設定、または画面に「要確認」が残っている | ビルドが失敗する |
 
 ## ページ
 

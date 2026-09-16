@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import JsonLd from '@/components/ui/JsonLd';
-import Pending from '@/components/ui/Pending';
 import { breadcrumbJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
@@ -11,6 +10,12 @@ export const metadata: Metadata = buildMetadata({
   description: `${shop.name}の個人情報保護方針。お問い合わせでお預かりする個人情報の取り扱いについて。`,
   path: '/privacy',
 });
+
+/** 2026-09-16 → 2026年9月16日 */
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${y}年${m}月${d}日`;
+}
 
 const crumbs = [
   { name: 'ホーム', href: '/' },
@@ -41,6 +46,7 @@ const sections = [
     h: '4. 第三者への提供',
     p: [
       '法令に基づく場合を除き、お客様の同意なく第三者に提供しません。',
+      `お見積りおよび施工に必要な範囲で、${shop.hq.name}（本部）および協力会社と共有することがあります。`,
       'フォームの送信には外部のメール配信サービスを利用しており、送信内容はメール送信のために同サービスを経由します。',
     ],
   },
@@ -65,9 +71,9 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-[44rem]">
           <Breadcrumbs crumbs={crumbs} />
           <h1 className="display mt-8 text-[1.7rem] sm:text-[2.2rem]">個人情報保護方針</h1>
-          <div className="mt-6">
-            <Pending block>内容が静岡EASTの実際の運用と合っているか、制定日</Pending>
-          </div>
+          {shop.privacyPolicyDate && (
+            <p className="mt-6 text-[0.9rem] text-hai">制定日：{formatDate(shop.privacyPolicyDate)}</p>
+          )}
           <div className="mt-10 space-y-10">
             {sections.map((s) => (
               <section key={s.h}>
