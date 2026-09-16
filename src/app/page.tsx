@@ -14,6 +14,7 @@ import { galleryKeys, photos } from '@/data/photos';
 import { regions } from '@/data/areas';
 import { shop } from '@/data/shop';
 import { origin, turf, values } from '@/data/story';
+import { mainProduct, otherProducts } from '@/data/products';
 import { works } from '@/data/works';
 
 const baseMeta = buildMetadata({ title: homeTitle, description: defaultDescription, path: '/', ogImage: photos.kannamiGardenAfter.src });
@@ -170,32 +171,58 @@ export default function HomePage() {
       </section>
 
       <section className="cv border-t border-sen bg-shiro py-16 sm:py-20" aria-labelledby="turf-heading">
-        <div className="mx-auto grid max-w-[84rem] gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
-          <Reveal variant="line">
-            <h2 id="turf-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
-              静岡EASTが使っている人工芝
-            </h2>
-            <figure className="mt-6">
-              <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
-                <Photo photo={photos.productAmazingTurf} sizes="(min-width: 1024px) 26rem, 100vw" />
+        <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+            <Reveal variant="line">
+              <h2 id="turf-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
+                静岡EASTが使っている人工芝
+              </h2>
+              <figure className="mt-6">
+                <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
+                  <Photo photo={photos[mainProduct.photo]} sizes="(min-width: 1024px) 26rem, 100vw" />
+                </div>
+                <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{photos[mainProduct.photo].credit}</figcaption>
+              </figure>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="display text-[1.15rem] text-fukami">{mainProduct.name}</p>
+              <div className="mt-5 space-y-4 text-[0.98rem] leading-[2.05] text-sumi-2">
+                {mainProduct.ownerNote ? <p>{mainProduct.ownerNote}</p> : <Pending block>どんなお客様・場所に提案するか（静岡EASTの言葉で）</Pending>}
+                <p>{turf.reaction}</p>
               </div>
-              <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{photos.productAmazingTurf.credit}</figcaption>
-            </figure>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="display text-[1.15rem] text-fukami">{turf.name}</p>
-            <div className="mt-5 space-y-4 text-[0.98rem] leading-[2.05] text-sumi-2">
-              <p>{turf.whenChosen}</p>
-              <p>{turf.reaction}</p>
-            </div>
-            <p className="mt-6 text-[0.8rem] leading-[1.8] text-hai">
-              商品の仕様・価格は本部の公式情報です。このページには載せていません。
-            </p>
-            <Link href="/works" className="rule-link mt-6 text-fukami">
-              この人工芝を使った施工事例
-              <ArrowIcon />
-            </Link>
-          </Reveal>
+              <p className="mt-6 text-[0.8rem] leading-[1.8] text-hai">商品の仕様・価格は本部の公式情報です。このページには載せていません。</p>
+              <Link href="/works" className="rule-link mt-6 text-fukami">
+                この人工芝を使った施工事例
+                <ArrowIcon />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="mt-16 border-t border-sen pt-10">
+            <Reveal variant="line">
+              <h3 className="display text-[1.15rem]">そのほかに扱っている商品</h3>
+              <p className="mt-3 text-[0.85rem] leading-[1.9] text-hai">
+                {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。商品名は本部公式サイトの表記によります。
+              </p>
+            </Reveal>
+            <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {otherProducts.map((product, i) => {
+                const photo = photos[product.photo];
+                return (
+                  <Reveal as="li" key={product.name} delay={(i % 3) * 60}>
+                    <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
+                      <Photo photo={photo} sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw" />
+                    </div>
+                    <p className="mt-4 display text-[1.02rem] text-fukami">{product.name}</p>
+                    <div className="mt-2.5 text-[0.9rem] leading-[1.95] text-sumi-2">
+                      {product.ownerNote ?? <Pending>どんなお客様・場所に提案するか（静岡EASTの言葉で）</Pending>}
+                    </div>
+                    <p className="mt-2 text-[0.72rem] leading-[1.7] text-hai">{photo.credit}</p>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </section>
 

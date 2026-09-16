@@ -35,7 +35,7 @@ const APP = path.join(ROOT, 'src', 'app');
  *
  * assets/provided にある、まだ使っていない提供画像:
  *   scene-mansion（建物と塀のあいだの細長いスペース）
- *   product-*（アメイジングターフ以外の6点） / factory-*（3点・本部サイトの工場画像と同じもの）
+ *   factory-*（3点・本部サイトの工場画像と同じもの）
  */
 const PHOTO_FILES = [
   ['provided/scene-garden.jpg', 'scene-garden.jpg', 800],
@@ -46,6 +46,12 @@ const PHOTO_FILES = [
   ['provided/scene-entrance.jpg', 'scene-entrance.jpg', 800],
   ['provided/scene-parking.jpg', 'scene-parking.jpg', 800],
   ['provided/product-amazing-turf.jpg', 'product-amazing-turf.jpg', 800],
+  ['provided/product-amazing-turf-lite.jpg', 'product-amazing-turf-lite.jpg', 800],
+  ['provided/product-island-grass-r.jpg', 'product-island-grass-r.jpg', 800],
+  ['provided/product-island-grass-c.jpg', 'product-island-grass-c.jpg', 800],
+  ['provided/product-island-grass-g.jpg', 'product-island-grass-g.jpg', 800],
+  ['provided/product-golf-green.jpg', 'product-golf-green.jpg', 800],
+  ['provided/product-geofill.jpg', 'product-geofill.jpg', 800],
   ['own/representative.jpg', 'representative.jpg', 800],
   ['own/works/kannami-garden-before.jpg', 'works/kannami-garden-before.jpg', 1200],
   ['own/works/kannami-garden-after.jpg', 'works/kannami-garden-after.jpg', 1200],
