@@ -42,7 +42,7 @@ export const photos = {
     src: '/photos/product-amazing-turf.jpg',
     width: 500,
     height: 280,
-    alt: '人工芝の断面。緑の芝葉と、その根元の茶色い下葉',
+    alt: 'アメイジングターフの断面。緑の芝葉と、その根元の茶色い下葉',
     source: 'provided',
     credit: PROVIDED_PRODUCT,
   },

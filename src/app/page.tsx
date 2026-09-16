@@ -183,12 +183,7 @@ export default function HomePage() {
             </figure>
           </Reveal>
           <Reveal delay={100}>
-            <p className="display text-[1.15rem] text-fukami">
-              {turf.name}
-              <span className="ml-3 align-middle">
-                <Pending>商品名の表記と、この写真がこの商品のものか（提供画像のファイル名と中身が一致していなかったため）</Pending>
-              </span>
-            </p>
+            <p className="display text-[1.15rem] text-fukami">{turf.name}</p>
             <div className="mt-5 space-y-4 text-[0.98rem] leading-[2.05] text-sumi-2">
               <p>{turf.whenChosen}</p>
               <p>{turf.reaction}</p>
