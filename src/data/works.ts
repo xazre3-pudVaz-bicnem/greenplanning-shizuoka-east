@@ -16,6 +16,8 @@ export type Work = {
   size: string;
   /** お客様のご要望 */
   request: string;
+  /** 使った人工芝（オーナー様に確認できたものだけ） */
+  product?: string;
   /** 静岡EASTが工夫したこと */
   ingenuity: string;
   /** お客様の掲載許可。true のものだけを載せる */
@@ -36,12 +38,13 @@ const allWorks: Work[] = [
       'もともと敷いてあった天然芝が剥げてしまい、表面が凸凹になっていました。フラットにして人工芝を敷き、お子さまとのサッカー練習がまたできるようにしたい、というご要望でした。',
     ingenuity:
       'もともと芝生のなかった配管口にも人工芝を施工し、全面をフラットな状態にして、今までよりもサッカーを楽しめる環境にしました。',
+    product: 'アメイジングターフ',
     permission: true,
     photos: [
       { photo: 'kannamiGardenBefore', caption: '施工前' },
       { photo: 'kannamiGardenAfter', caption: '施工後' },
     ],
-    source: 'オーナー様ヒアリング（2026年9月15日）',
+    source: 'オーナー様ヒアリング（2026年9月15日・16日）',
   },
 ];
 

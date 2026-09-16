@@ -20,6 +20,7 @@ export default function WorkCase({ work, compact = false, headingLevel = 'h2' }:
     { label: '地域', value: work.area },
     { label: '場所', value: work.place },
     { label: '広さ', value: work.size },
+    ...(work.product ? [{ label: '使用商品', value: work.product }] : []),
   ];
 
   return (

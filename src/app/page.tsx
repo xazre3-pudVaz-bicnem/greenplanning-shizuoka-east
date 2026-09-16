@@ -13,7 +13,7 @@ import { defaultDescription, homeTitle } from '@/lib/site';
 import { galleryKeys, photos } from '@/data/photos';
 import { regions } from '@/data/areas';
 import { shop } from '@/data/shop';
-import { origin, values } from '@/data/story';
+import { origin, turf, values } from '@/data/story';
 import { works } from '@/data/works';
 
 const baseMeta = buildMetadata({ title: homeTitle, description: defaultDescription, path: '/', ogImage: photos.kannamiGardenAfter.src });
@@ -163,6 +163,41 @@ export default function HomePage() {
           <Reveal>
             <Link href="/works" className="rule-link mt-10 text-fukami">
               施工事例を見る
+              <ArrowIcon />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="cv border-t border-sen bg-shiro py-16 sm:py-20" aria-labelledby="turf-heading">
+        <div className="mx-auto grid max-w-[84rem] gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+          <Reveal variant="line">
+            <h2 id="turf-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
+              静岡EASTが使っている人工芝
+            </h2>
+            <figure className="mt-6">
+              <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
+                <Photo photo={photos.productAmazingTurf} sizes="(min-width: 1024px) 26rem, 100vw" />
+              </div>
+              <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{photos.productAmazingTurf.credit}</figcaption>
+            </figure>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="display text-[1.15rem] text-fukami">
+              {turf.name}
+              <span className="ml-3 align-middle">
+                <Pending>商品名の表記と、この写真がこの商品のものか（提供画像のファイル名と中身が一致していなかったため）</Pending>
+              </span>
+            </p>
+            <div className="mt-5 space-y-4 text-[0.98rem] leading-[2.05] text-sumi-2">
+              <p>{turf.whenChosen}</p>
+              <p>{turf.reaction}</p>
+            </div>
+            <p className="mt-6 text-[0.8rem] leading-[1.8] text-hai">
+              商品の仕様・価格は本部の公式情報です。このページには載せていません。
+            </p>
+            <Link href="/works" className="rule-link mt-6 text-fukami">
+              この人工芝を使った施工事例
               <ArrowIcon />
             </Link>
           </Reveal>

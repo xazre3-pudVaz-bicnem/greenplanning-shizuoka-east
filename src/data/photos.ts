@@ -25,6 +25,8 @@ export type PhotoData = {
 const PROVIDED = 'イメージ写真（グリーンプランニング本部提供）';
 const OWN_WORK = '写真：グリーンプランニング静岡EAST（お客様の許可を得て掲載）';
 
+const PROVIDED_PRODUCT = '写真：グリーンプランニング本部提供';
+
 const provided = (src: string, alt: string): PhotoData => ({ src, width: 800, height: 600, alt, source: 'provided', credit: PROVIDED });
 
 export const photos = {
@@ -36,6 +38,14 @@ export const photos = {
   sceneEntrance: provided('/photos/scene-entrance.jpg', '門柱から玄関ステップまでのスペースに人工芝を敷いた住宅'),
   sceneParking: provided('/photos/scene-parking.jpg', 'コンクリートの駐車スペースの目地に人工芝を入れた例'),
 
+  productAmazingTurf: {
+    src: '/photos/product-amazing-turf.jpg',
+    width: 500,
+    height: 280,
+    alt: '人工芝の断面。緑の芝葉と、その根元の茶色い下葉',
+    source: 'provided',
+    credit: PROVIDED_PRODUCT,
+  },
   representative: {
     src: '/photos/representative.jpg',
     width: 363,
