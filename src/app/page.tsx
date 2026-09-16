@@ -202,26 +202,27 @@ export default function HomePage() {
             <Reveal variant="line">
               <h3 className="display text-[1.15rem]">そのほかに扱っている商品</h3>
               <p className="mt-3 text-[0.85rem] leading-[1.9] text-hai">
-                {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。商品名は本部公式サイトの表記によります。
+                {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。
               </p>
             </Reveal>
-            <ul className="mt-8 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {otherProducts.map((product, i) => {
-                const photo = photos[product.photo];
-                return (
-                  <Reveal as="li" key={product.name} delay={(i % 3) * 60}>
+            <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+              {otherProducts.map((product, i) => (
+                <Reveal as="li" key={product.name} delay={(i % 3) * 50}>
+                  <Link href="/products" className="group block">
                     <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
-                      <Photo photo={photo} sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw" />
+                      <Photo photo={photos[product.photo]} sizes="(min-width: 1024px) 13rem, 45vw" />
                     </div>
-                    <p className="mt-4 display text-[1.02rem] text-fukami">{product.name}</p>
-                    <div className="mt-2.5 text-[0.9rem] leading-[1.95] text-sumi-2">
-                      {product.ownerNote ?? <Pending>どんなお客様・場所に提案するか（静岡EASTの言葉で）</Pending>}
-                    </div>
-                    <p className="mt-2 text-[0.72rem] leading-[1.7] text-hai">{photo.credit}</p>
-                  </Reveal>
-                );
-              })}
+                    <p className="mt-3 text-[0.86rem] leading-[1.6] text-sumi-2 group-hover:text-fukami">{product.name}</p>
+                  </Link>
+                </Reveal>
+              ))}
             </ul>
+            <Reveal>
+              <Link href="/products" className="rule-link mt-9 text-fukami">
+                取り扱い商品を見る
+                <ArrowIcon />
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
