@@ -50,12 +50,12 @@ export default function AboutPage() {
 
       <section className="cv bg-shiro py-14 sm:py-20" aria-labelledby="greeting-heading">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
-          <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
-          <figure className="mx-auto w-full max-w-[16rem] lg:mx-0 lg:max-w-none">
+          <div className="grid gap-10 lg:grid-cols-[12rem_1fr] lg:gap-14">
+          <figure className="mx-auto w-full max-w-[11rem] lg:mx-0 lg:max-w-none">
             <div className="relative aspect-square overflow-hidden bg-kinari">
-              <Photo photo={photos.representative} sizes="(min-width: 1024px) 18rem, 16rem" />
+              <Photo photo={photos.representative} sizes="(min-width: 1024px) 12rem, 11rem" />
             </div>
-            <figcaption className="mt-3 text-center text-[0.85rem] text-sumi-2 lg:text-left">代表 {shop.representative}</figcaption>
+            <figcaption className="mt-3 text-center text-[0.8rem] text-sumi-2 lg:text-left">代表 {shop.representative}</figcaption>
           </figure>
           <Reveal variant="line" className="max-w-[44rem]">
             <h2 id="greeting-heading" className="display text-[1.4rem] sm:text-[1.7rem]">

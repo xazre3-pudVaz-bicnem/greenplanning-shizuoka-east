@@ -13,11 +13,11 @@ import { photos } from '@/data/photos';
 import { products, productsPage } from '@/data/products';
 import { shop } from '@/data/shop';
 
-const title = `${productsPage.title}｜${shop.shortName}の高品質人工芝`;
+const title = `${productsPage.title}｜高品質人工芝`;
 const description = `${shop.name}が扱う人工芝。${products.map((p) => p.name).join('、')}。${shop.hq.name}と同じラインナップを取り扱っています。`;
 
 export const metadata: Metadata = buildMetadata({
-  title: productsPage.title,
+  title,
   description,
   path: '/products',
   ogImage: photos.productAmazingTurf.src,
@@ -41,7 +41,7 @@ export default function ProductsPage() {
       <header className="bg-shiro pt-24 sm:pt-32">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <Breadcrumbs crumbs={crumbs} />
-          <h1 className="display mt-8 text-[1.75rem] leading-[1.4] sm:text-[2.3rem]">{title}</h1>
+          <h1 className="display mt-8 text-[1.75rem] leading-[1.4] sm:text-[2.3rem]">{productsPage.title}</h1>
           <p className="mt-6 max-w-[44rem] text-[0.98rem] leading-[2.05] text-sumi-2">{productsPage.lead}</p>
           <p className="mt-5 max-w-[44rem] text-[0.85rem] leading-[1.9] text-hai">
             {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。商品名・仕様は本部公式情報です。

@@ -43,10 +43,11 @@ export function localBusinessJsonLd() {
     image: image.length ? image : undefined,
     address: {
       '@type': 'PostalAddress',
+      // 番地は公開しない（オーナー様のご希望）。町名までを streetAddress に入れる
       postalCode: shop.address.postalCode,
       addressRegion: shop.address.prefecture,
       addressLocality: shop.address.city,
-      streetAddress: shop.address.line,
+      streetAddress: shop.address.town,
       addressCountry: shop.address.country,
     },
     openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', opens: shop.hours.open, closes: shop.hours.close }],

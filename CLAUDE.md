@@ -48,6 +48,7 @@
 | 内容 | ファイル |
 | --- | --- |
 | 店舗情報（NAP・パートナー区分・担当エリア・事業内容・本部URL） | `src/data/shop.ts`（ここだけを直す） |
+| 取り扱い商品（本部と同じラインナップ。紹介文は静岡EAST提供） | `src/data/products.ts` |
 | 担当エリアの市町 | `src/data/areas.ts` |
 | オーナー様の言葉（始めたきっかけ・大事にしていること・代表挨拶） | `src/data/story.ts`（原文は `_internal/ヒアリング回答_*.md`） |
 | 施工事例（静岡EASTの施工・掲載許可ありのみ。1件ごとに `/works/[slug]`） | `src/data/works.ts`（写真の元データは `assets/own/works/`） |
@@ -65,6 +66,8 @@
 ## 書き方・デザイン
 
 - 敬体（です・ます）。根拠のない断定（No.1・最安・無料・絶対 等）をしない。「当店」は使わない
+- **所在地の番地は公開しない**（オーナー様のご希望）。画面・構造化データ・地図のすべてで「静岡県沼津市泉町」まで（`src/data/shop.ts` の `address`）
+- 静岡EASTから届いた文章は、依頼があれば推敲してよい。ただし事実を足さず、裏付けのない優劣・安全性の断定を作らないこと。推敲後は静岡EASTの確認を取る
 - 白ベース（`--color-shiro`）、芝のグリーン（`--color-shiba`）、深い緑（`--color-fukami`）、生成り（`--color-kinari`）。線は細く（`border-sen`）
 - Tailwind v4 のカスタムクラスは必ず `@layer components` の中に書く
 - アニメーションは `Reveal`（IntersectionObserver + CSS）だけ。ライブラリを足さない

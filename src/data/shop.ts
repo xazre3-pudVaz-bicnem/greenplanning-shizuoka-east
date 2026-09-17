@@ -25,12 +25,18 @@ export const shop = {
   partnerCategory: '加盟店認定パートナー' as string | null,
   /** オーナー様の回答での表記（2026年9月15日） */
   representative: '高橋 祐子',
+  /**
+   * 所在地。オーナー様のご希望（2026年9月17日）により、番地は公開しません。
+   * 画面・構造化データ・地図のすべてで「静岡県沼津市泉町」までにとどめています。
+   * 番地をこのファイルに書き足さないこと。
+   */
   address: {
     postalCode: '410-0045',
     prefecture: '静岡県',
     city: '沼津市',
-    line: '泉町16-6-903',
-    full: '〒410-0045 静岡県沼津市泉町16-6-903',
+    town: '泉町',
+    /** 画面に出す表記（番地なし） */
+    full: '静岡県沼津市泉町',
     country: 'JP',
   },
   tel: '055-953-9777',
@@ -62,9 +68,8 @@ export const shop = {
   /** 事業内容（オーナー様の回答：人工芝の施工、材料だけの販売、メンテナンス） */
   business: ['人工芝の施工', '人工芝材料の販売', '人工芝のメンテナンス'],
   /** Googleマップ埋め込み（住所検索）。APIキー不要 */
-  mapEmbedSrc:
-    'https://www.google.com/maps?q=' + encodeURIComponent('静岡県沼津市泉町16-6') + '&z=15&output=embed&hl=ja',
-  mapLinkUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('静岡県沼津市泉町16-6-903'),
+  mapEmbedSrc: 'https://www.google.com/maps?q=' + encodeURIComponent('静岡県沼津市泉町') + '&z=14&output=embed&hl=ja',
+  mapLinkUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('静岡県沼津市泉町'),
 };
 
 export type Shop = typeof shop;

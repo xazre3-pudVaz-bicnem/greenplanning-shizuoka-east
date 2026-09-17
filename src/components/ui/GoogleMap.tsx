@@ -8,7 +8,7 @@ export default function GoogleMap({ className = '' }: { className?: string }) {
   return (
     <div className={`map-frame hairline relative aspect-[4/3] w-full overflow-hidden bg-kinari sm:aspect-[16/9] ${className}`}>
       <iframe
-        title={`${shop.shortName}の地図（沼津市泉町）`}
+        title={`${shop.shortName}の地図（${shop.address.city}${shop.address.town}）`}
         src={shop.mapEmbedSrc}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
