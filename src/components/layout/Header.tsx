@@ -79,7 +79,7 @@ export default function Header() {
                 />
               </Link>
             ))}
-            <a href={shop.telHref} className="flex items-center gap-2 text-sumi-2 transition-colors hover:text-fukami">
+            <a href={shop.telHref} className="flex items-center gap-2 py-2 text-sumi-2 transition-colors hover:text-fukami">
               <PhoneIcon className="text-[1.05rem] text-fukami" />
               <span className="num text-[1.02rem] leading-none">{shop.tel}</span>
             </a>

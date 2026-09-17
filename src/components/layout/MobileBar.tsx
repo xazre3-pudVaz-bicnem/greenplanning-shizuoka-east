@@ -4,11 +4,11 @@ import { MailIcon, PhoneIcon } from '@/components/ui/icons';
 
 /**
  * スマホの画面下に出す固定バー。「電話」「お問い合わせ」の2つだけ。
- * aria-label は付けず、見えている文字をそのまま名前にする（読み上げと表示の不一致を避ける）。
+ * 画面の下に固定するため、ページのランドマーク（nav）にして読み上げから外れないようにしている。
  */
 export default function MobileBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-sen bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
+    <nav aria-label="電話・お問い合わせ" className="fixed inset-x-0 bottom-0 z-40 border-t border-sen bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
       <ul className="grid grid-cols-2">
         <li className="border-r border-sen">
           <a href={shop.telHref} className="flex h-14 flex-col items-center justify-center gap-1">
@@ -24,6 +24,6 @@ export default function MobileBar() {
           </Link>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }

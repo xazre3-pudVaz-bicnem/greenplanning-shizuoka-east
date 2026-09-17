@@ -4,6 +4,7 @@ import { footerNav } from '@/data/nav';
 
 export const metadata: Metadata = {
   title: 'ページが見つかりません',
+  // レイアウト側と同じ書き方にしておく（違うと meta robots が2つ出る）
   robots: { index: false, follow: false },
 };
 
