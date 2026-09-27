@@ -44,7 +44,7 @@ export default function ProductsPage() {
           <h1 className="display mt-8 text-[1.75rem] leading-[1.4] sm:text-[2.3rem]">{productsPage.title}</h1>
           <p className="mt-6 max-w-[44rem] text-[0.98rem] leading-[2.05] text-sumi-2">{productsPage.lead}</p>
           <p className="mt-5 max-w-[44rem] text-[0.85rem] leading-[1.9] text-hai">
-            {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。商品名・仕様は本部公式情報です。
+            {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。
           </p>
           <div className="mt-8 max-w-[44rem]">
             <Pending block>
@@ -67,18 +67,15 @@ export default function ProductsPage() {
             const photo = photos[product.photo];
             return (
               <Reveal key={product.name} as="article" className="grid gap-8 border-t border-sen pt-10 lg:grid-cols-[1fr_1.35fr] lg:gap-14">
-                <figure>
-                  <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
-                    <Photo photo={photo} sizes="(min-width: 1024px) 28rem, 100vw" priority={i === 0} />
-                  </div>
-                  <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{photo.credit}</figcaption>
-                </figure>
+                <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
+                  <Photo photo={photo} sizes="(min-width: 1024px) 28rem, 100vw" priority={i === 0} />
+                </div>
                 <div>
                   <h2 className="display text-[1.3rem] leading-[1.5] sm:text-[1.5rem]">
                     {product.name}
                     <span className="ml-3 text-[0.72em] tracking-[0.06em] text-hai">{product.nameEn}</span>
                   </h2>
-                  {product.pile && <p className="mt-2 text-[0.85rem] text-hai">{product.pile}（本部公式情報）</p>}
+                  {product.pile && <p className="mt-2 text-[0.85rem] text-hai">{product.pile}</p>}
                   <p className="display mt-4 text-[1.02rem] text-fukami">{product.catch}</p>
                   <p className="mt-3 text-[0.95rem] leading-[2] text-sumi-2">{product.body}</p>
                   {product.ownerNote && (
@@ -96,6 +93,9 @@ export default function ProductsPage() {
 
       <section className="bg-shiro pb-12">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+          <p className="text-[0.76rem] leading-[1.8] text-hai">
+            商品名・芝丈などの商品情報、および商品写真は、グリーンプランニング本部の公式情報・提供によるものです。
+          </p>
           <nav aria-label="ほかのページ" className="flex flex-wrap gap-x-8 gap-y-3 border-t border-sen pt-8">
             <Link href="/works" className="rule-link text-fukami">
               施工事例

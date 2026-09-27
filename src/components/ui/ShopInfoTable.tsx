@@ -7,7 +7,7 @@ import { ExternalIcon } from './icons';
  * 店舗情報の表。NAPは data/shop.ts から。
  *
  * - compact … トップ・お問い合わせで使う短い表
- * - 通常   … 会社概要（/about）。本部との関係性とパートナー区分を明記し、
+ * - 通常   … 会社概要（/about）。パートナー区分と運営本部を明記し、
  *            本部公式サイトへのリンクはこの表の1か所だけに置く（本部チェックリスト「本部公式へのリンク」）
  */
 export default function ShopInfoTable({ compact = false }: { compact?: boolean }) {
@@ -70,15 +70,12 @@ export default function ShopInfoTable({ compact = false }: { compact?: boolean }
         ),
       },
       {
-        label: '本部との関係',
+        label: '運営本部',
         value: (
-          <span>
-            <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1 underline underline-offset-4">
-              {shop.hq.name}
-              <ExternalIcon className="text-[0.85em]" />
-            </a>
-            の{shop.partnerCategory ?? 'パートナー'}です。本部の直営店ではありません。
-          </span>
+          <a href={shop.hq.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1 underline underline-offset-4">
+            {shop.hq.name}
+            <ExternalIcon className="text-[0.85em]" />
+          </a>
         ),
       },
     );

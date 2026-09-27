@@ -36,9 +36,7 @@ export default function WorkCase({ work, compact = false, headingLevel = 'h2' }:
                     <div className="relative overflow-hidden bg-kinari-2" style={{ aspectRatio: `${p.width} / ${p.height}` }}>
                       <Photo photo={p} sizes={compact ? '(min-width: 1024px) 26rem, (min-width: 640px) 50vw, 100vw' : '(min-width: 1280px) 38rem, (min-width: 640px) 50vw, 100vw'} priority={!compact && i === 0} />
                     </div>
-                    <figcaption className="mt-2 text-[0.76rem] leading-[1.7] text-hai">
-                      <span className="text-sumi-2">{caption}</span>／{p.credit}
-                    </figcaption>
+                    <figcaption className="mt-2 text-[0.76rem] leading-[1.7] text-sumi-2">{caption}</figcaption>
                   </figure>
                 </li>
               );

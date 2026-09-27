@@ -177,12 +177,9 @@ export default function HomePage() {
               <h2 id="turf-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
                 静岡EASTが使っている人工芝
               </h2>
-              <figure className="mt-6">
-                <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
-                  <Photo photo={photos[mainProduct.photo]} sizes="(min-width: 1024px) 26rem, 100vw" />
-                </div>
-                <figcaption className="mt-2.5 text-[0.74rem] leading-[1.7] text-hai">{photos[mainProduct.photo].credit}</figcaption>
-              </figure>
+              <div className="relative mt-6 aspect-[500/280] overflow-hidden bg-kinari">
+                <Photo photo={photos[mainProduct.photo]} sizes="(min-width: 1024px) 26rem, 100vw" />
+              </div>
             </Reveal>
             <Reveal delay={100}>
               <p className="display text-[1.15rem] text-fukami">{mainProduct.name}</p>
@@ -218,7 +215,8 @@ export default function HomePage() {
               ))}
             </ul>
             <Reveal>
-              <Link href="/products" className="rule-link mt-9 text-fukami">
+              <p className="mt-6 text-[0.74rem] leading-[1.7] text-hai">写真：グリーンプランニング本部提供</p>
+              <Link href="/products" className="rule-link mt-6 text-fukami">
                 取り扱い商品を見る
                 <ArrowIcon />
               </Link>
@@ -233,9 +231,6 @@ export default function HomePage() {
             <h2 id="gallery-heading" className="display text-[1.4rem] sm:text-[1.7rem]">
               人工芝のある風景
             </h2>
-            <p className="mt-4 text-[0.85rem] leading-[1.9] text-hai">
-              グリーンプランニング本部から提供されたイメージ写真です。上の「静岡EASTの施工事例」とは別のものです。
-            </p>
           </Reveal>
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
             {galleryKeys.map((key, i) => {
@@ -249,6 +244,7 @@ export default function HomePage() {
               );
             })}
           </ul>
+          <p className="mt-4 text-[0.74rem] leading-[1.7] text-hai">写真：グリーンプランニング本部提供</p>
         </div>
       </section>
 
