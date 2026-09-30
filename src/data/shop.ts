@@ -64,7 +64,7 @@ export const shop = {
    * 本部の承認を得て公開する日が決まったら、その日付を入れてください。
    * 空のままだと公開ビルドが失敗します（src/lib/publish-guard.ts）。
    */
-  privacyPolicyDate: null as string | null,
+  privacyPolicyDate: '2026-09-30' as string | null,
   /** 事業内容（オーナー様の回答：人工芝の施工、材料だけの販売、メンテナンス） */
   business: ['人工芝の施工', '人工芝材料の販売', '人工芝のメンテナンス'],
   /** Googleマップ埋め込み（住所検索）。APIキー不要 */

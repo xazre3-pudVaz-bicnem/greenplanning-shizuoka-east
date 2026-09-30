@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import CtaBand from '@/components/ui/CtaBand';
 import JsonLd from '@/components/ui/JsonLd';
-import Pending from '@/components/ui/Pending';
 import Photo from '@/components/ui/Photo';
 import Reveal from '@/components/ui/Reveal';
 import { ArrowIcon } from '@/components/ui/icons';
@@ -33,7 +32,7 @@ const crumbs = [
  *
  * 見出し・リード文・各商品の紹介文は、静岡EAST側から届いた原稿です（data/products.ts）。
  * 制作側で文章を足したり、本部サイトの文章をAIで言い換えたりしないこと。
- * 仕様の数値は本部の情報にあたるため、公開前に本部の確認が必要です（ページ上部の「要確認」）。
+ * 掲載内容は本部の確認・承認を得ています（2026年9月30日）。変更するときは、あらためて本部の確認を取ること。
  */
 export default function ProductsPage() {
   return (
@@ -46,18 +45,6 @@ export default function ProductsPage() {
           <p className="mt-5 max-w-[44rem] text-[0.85rem] leading-[1.9] text-hai">
             {shop.shortName}は、{shop.hq.name}と同じラインナップを扱っています。
           </p>
-          <div className="mt-8 max-w-[44rem]">
-            <Pending block>
-              公開前に確認すること：
-              <span className="mt-2 block">
-                {productsPage.toConfirm.map((t) => (
-                  <span key={t} className="mt-1 block">
-                    ・{t}
-                  </span>
-                ))}
-              </span>
-            </Pending>
-          </div>
         </div>
       </header>
 
