@@ -89,7 +89,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           本文へスキップ
         </a>
         <Header />
-        <main id="main">{children}</main>
+        {/* tabIndex={-1}: 「本文へスキップ」でフォーカスを受け取れるようにする（Tabキーの順路には入らない） */}
+        <main id="main" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <MobileBar />
         <RevealObserver />

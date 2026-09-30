@@ -47,7 +47,8 @@ html {
   scroll-behavior: auto;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: 5.5rem;
+  /* 固定ヘッダー（最大 4.75rem）の下に、読み込み後のずれ分の余裕を足した値 */
+  scroll-padding-top: 7rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
