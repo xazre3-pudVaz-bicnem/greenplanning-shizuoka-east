@@ -43,15 +43,17 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* ページ移動時は即座に先頭へ。なめらかにするのはページ内リンクのときだけ（下の :has(:target)） */
+  scroll-behavior: auto;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: 5.5rem;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@media (prefers-reduced-motion: no-preference) {
+  /* ページ内リンクで飛ぶときだけ、なめらかにスクロールする */
+  html:has(:target) {
+    scroll-behavior: smooth;
   }
 }
 
