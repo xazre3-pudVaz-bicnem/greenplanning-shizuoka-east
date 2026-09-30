@@ -14,3 +14,5 @@ next-env.d.ts
 /独自Webサイト・SNS運用チェックリスト_静岡EAST.pdf
 /*.pdf
 /_internal/
+
+.vercel
