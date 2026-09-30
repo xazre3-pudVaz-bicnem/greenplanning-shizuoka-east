@@ -22,6 +22,8 @@ export type Product = {
   /** 本部公式サイトの表記 */
   name: string;
   nameEn: string;
+  /** ページ内リンク・構造化データ用のID（見た目には出ない） */
+  anchor: string;
   photo: PhotoKey;
   /** 人工芝そのものか、施工に使う材料か */
   kind: 'turf' | 'material';
@@ -39,6 +41,7 @@ export const products: Product[] = [
   {
     name: 'アメイジングターフ',
     nameEn: 'Amazing Turf',
+    anchor: 'amazing-turf',
     photo: 'productAmazingTurf',
     kind: 'turf',
     pile: '芝丈35mm',
@@ -49,6 +52,7 @@ export const products: Product[] = [
   {
     name: 'アメイジングターフ Lite',
     nameEn: 'Amazing Turf Lite',
+    anchor: 'amazing-turf-lite',
     photo: 'productAmazingTurfLite',
     kind: 'turf',
     pile: '芝丈25mm',
@@ -59,6 +63,7 @@ export const products: Product[] = [
   {
     name: 'アイランドグラス タイプＲ',
     nameEn: 'Island Grass Type R',
+    anchor: 'island-grass-r',
     photo: 'productIslandGrassR',
     kind: 'turf',
     pile: '芝丈35mm・25mm',
@@ -69,6 +74,7 @@ export const products: Product[] = [
   {
     name: 'アイランドグラス タイプＣ',
     nameEn: 'Island Grass Type C',
+    anchor: 'island-grass-c',
     photo: 'productIslandGrassC',
     kind: 'turf',
     pile: '芝丈35mm・25mm',
@@ -79,6 +85,7 @@ export const products: Product[] = [
   {
     name: 'アイランドグラス タイプＧ',
     nameEn: 'Island Grass Type G',
+    anchor: 'island-grass-g',
     photo: 'productIslandGrassG',
     kind: 'turf',
     pile: '芝丈10mm',
@@ -89,6 +96,7 @@ export const products: Product[] = [
   {
     name: 'ゴルフグリーン用ターフ',
     nameEn: 'Golf Green',
+    anchor: 'golf-green',
     photo: 'productGolfGreen',
     kind: 'turf',
     pile: '芝丈13mm',
@@ -99,6 +107,7 @@ export const products: Product[] = [
   {
     name: '人工芝充填材 ジオフィル',
     nameEn: 'GeoFill',
+    anchor: 'geofill',
     photo: 'productGeofill',
     kind: 'material',
     catch: '天然素材100%。人工芝を快適にする充填材',

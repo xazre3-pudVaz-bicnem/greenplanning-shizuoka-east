@@ -37,8 +37,10 @@ export function localBusinessJsonLd() {
     name: shop.name,
     description: defaultDescription,
     url: url ?? undefined,
-    telephone: shop.tel,
+    // 国際表記にしておくと、検索エンジン側で電話番号として確実に解釈される
+    telephone: shop.telE164,
     email: shop.email,
+    hasMap: shop.mapLinkUrl,
     logo: absoluteUrl('/brand/logo-shizuoka-east.jpg') ?? undefined,
     image: image.length ? image : undefined,
     address: {
@@ -140,6 +142,36 @@ export function workJsonLd(work: Work) {
     author: { '@id': `${home}#business` },
     publisher: { '@id': `${home}#business` },
   });
+}
+
+/**
+ * 取り扱い商品（/products）。
+ * 価格・在庫は載せていないので offers は出しません。名前・写真・説明と、扱っている店舗だけを示します。
+ */
+export function productsJsonLd(items: { name: string; anchor: string; description: string; image: string; kind: 'turf' | 'material' }[]) {
+  const page = absoluteUrl('/products');
+  const home = absoluteUrl('/');
+  if (!page || !home) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '取り扱い商品',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: prune({
+        '@type': 'Product',
+        name: item.name,
+        description: item.description,
+        image: absoluteUrl(item.image) ?? undefined,
+        url: `${page}#${item.anchor}`,
+        category: item.kind === 'material' ? '人工芝充填材' : '人工芝',
+        brand: { '@type': 'Brand', name: shop.hq.name },
+        offers: undefined,
+        seller: { '@id': `${home}#business` },
+      }),
+    })),
+  };
 }
 
 export function itemListJsonLd(args: { name: string; items: { name: string; href: string }[] }) {

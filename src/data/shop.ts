@@ -41,6 +41,8 @@ export const shop = {
   },
   tel: '055-953-9777',
   telHref: 'tel:0559539777',
+  /** 構造化データ用の国際表記（画面には出さない） */
+  telE164: '+81-55-953-9777',
   email: 'shizuoka-east@greenplanning.jp',
   hours: {
     label: '9:00〜17:00',

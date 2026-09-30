@@ -1,6 +1,18 @@
 import type { Metadata } from 'next';
 import { absoluteUrl, allowIndexing, siteName } from '@/lib/site';
+import { photos } from '@/data/photos';
 import { shop } from '@/data/shop';
+
+/** OG画像の寸法を data/photos.ts から引く（寸法を書いておくとSNS側の表示が安定する） */
+function ogImageMeta(src: string, url: string) {
+  const photo = Object.values(photos).find((p) => p.src === src);
+  return {
+    url,
+    ...(photo ? { width: photo.width, height: photo.height } : {}),
+    type: src.endsWith('.png') ? 'image/png' : 'image/jpeg',
+    alt: shop.name,
+  };
+}
 
 type BuildMetaArgs = {
   /** ページ固有のタイトル（サイト名はテンプレートで自動的に付きます） */
@@ -42,7 +54,7 @@ export function buildMetadata({ title, description, path, ogImage, noindex = fal
       url: canonical,
       siteName,
       locale: 'ja_JP',
-      ...(image ? { images: [{ url: image, alt: shop.name }] } : {}),
+      ...(image && ogImage ? { images: [ogImageMeta(ogImage, image)] } : {}),
     };
     meta.twitter = {
       card: image ? 'summary_large_image' : 'summary',

@@ -8,6 +8,8 @@ type Props = {
   /** 'up' = 下から浮かぶ / 'clip' = 写真が下から開く / 'line' = 文字が現れる */
   variant?: 'up' | 'clip' | 'line';
   as?: 'div' | 'section' | 'figure' | 'article' | 'li' | 'header' | 'p' | 'span';
+  /** ページ内リンク用のID（見た目には影響しない） */
+  id?: string;
 };
 
 const variantClass = {
@@ -30,10 +32,11 @@ const variantClass = {
  * 隠すスタイルは html.js が付いているときだけ効くので（globals.css）、
  * JSが無効な環境でも本文は最初から見えています。
  */
-export default function Reveal({ children, className = '', delay = 0, variant = 'up', as = 'div' }: Props) {
+export default function Reveal({ children, className = '', delay = 0, variant = 'up', as = 'div', id }: Props) {
   const Tag = as;
   return (
     <Tag
+      id={id}
       className={`${variantClass[variant]} ${className}`}
       data-visible="false"
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}

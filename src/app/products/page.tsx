@@ -6,7 +6,7 @@ import JsonLd from '@/components/ui/JsonLd';
 import Photo from '@/components/ui/Photo';
 import Reveal from '@/components/ui/Reveal';
 import { ArrowIcon } from '@/components/ui/icons';
-import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, productsJsonLd, webPageJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { photos } from '@/data/photos';
 import { products, productsPage } from '@/data/products';
@@ -53,7 +53,7 @@ export default function ProductsPage() {
           {products.map((product, i) => {
             const photo = photos[product.photo];
             return (
-              <Reveal key={product.name} as="article" className="grid gap-8 border-t border-sen pt-10 lg:grid-cols-[1fr_1.35fr] lg:gap-14">
+              <Reveal key={product.name} as="article" id={product.anchor} className="grid gap-8 border-t border-sen pt-10 lg:grid-cols-[1fr_1.35fr] lg:gap-14">
                 <div className="relative aspect-[500/280] overflow-hidden bg-kinari">
                   <Photo photo={photo} sizes="(min-width: 1024px) 28rem, 100vw" priority={i === 0} />
                 </div>
@@ -99,6 +99,11 @@ export default function ProductsPage() {
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <JsonLd data={webPageJsonLd({ type: 'CollectionPage', name: productsPage.title, description, path: '/products' })} />
+      <JsonLd
+        data={productsJsonLd(
+          products.map((p) => ({ name: p.name, anchor: p.anchor, description: p.body, image: photos[p.photo].src, kind: p.kind })),
+        )}
+      />
     </>
   );
 }
