@@ -24,6 +24,10 @@ const businessId = () => {
  * 評価・価格帯・本部の実績・本部との親子関係（本部直営と誤認されるおそれ）は入れません。
  * 営業日は「定休日を特に定めていない」ことしか分かっていないため、dayOfWeek は出さず時間だけを出しています。
  */
+/** 実際の担当エリア（data/areas.ts）だけを City として並べる */
+const areaServed = () =>
+  regions.flatMap((r) => r.municipalities.map((m) => ({ '@type': 'City', name: `${shop.address.prefecture}${m}` })));
+
 export function localBusinessJsonLd() {
   const url = absoluteUrl('/');
   const image = [photos.kannamiGardenAfter.src, photos.kannamiGardenBefore.src]
@@ -53,13 +57,22 @@ export function localBusinessJsonLd() {
       addressCountry: shop.address.country,
     },
     openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', opens: shop.hours.open, closes: shop.hours.close }],
-    areaServed: regions.flatMap((r) =>
-      r.municipalities.map((m) => ({ '@type': 'City', name: `${shop.address.prefecture}${m}` })),
-    ),
+    areaServed: areaServed(),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: '事業内容',
-      itemListElement: shop.business.map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+      // 実際に行っている業務だけ。提供者と対応地域をサービス単位でも示す
+      itemListElement: shop.business.map((name) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name,
+          serviceType: name,
+          provider: { '@id': businessId() },
+          // サービス単位では担当エリアをまとめて示す（市町の一覧は店舗情報側に1回だけ）
+          areaServed: { '@type': 'AdministrativeArea', name: shop.areaLabel },
+        },
+      })),
     },
     sameAs: [shop.instagram],
   });
@@ -85,11 +98,13 @@ export function webPageJsonLd(args: {
   name: string;
   description: string;
   path: string;
+  /** そのページを代表する画像（data/photos.ts の src） */
+  primaryImage?: string;
 }) {
   const url = absoluteUrl(args.path);
   const home = absoluteUrl('/');
   if (!url || !home) return null;
-  return {
+  return prune({
     '@context': 'https://schema.org',
     '@type': args.type,
     '@id': `${url}#webpage`,
@@ -99,7 +114,23 @@ export function webPageJsonLd(args: {
     inLanguage: 'ja',
     isPartOf: { '@id': `${home}#website` },
     about: { '@id': `${home}#business` },
-  };
+    primaryImageOfPage: args.primaryImage ? imageObject(args.primaryImage) : undefined,
+  });
+}
+
+/** 画像1点を ImageObject で表す（寸法を添えると画像検索で扱いやすい） */
+export function imageObject(src: string, caption?: string) {
+  const contentUrl = absoluteUrl(src);
+  if (!contentUrl) return undefined;
+  const photo = Object.values(photos).find((p) => p.src === src);
+  return prune({
+    '@type': 'ImageObject',
+    contentUrl,
+    url: contentUrl,
+    width: photo?.width,
+    height: photo?.height,
+    caption: caption ?? photo?.alt,
+  });
 }
 
 /** 代表者（/about）。名前・肩書き・写真だけ */
@@ -133,12 +164,7 @@ export function workJsonLd(work: Work) {
     url,
     inLanguage: 'ja',
     contentLocation: { '@type': 'Place', name: work.area, address: { '@type': 'PostalAddress', addressRegion: '静岡県', addressLocality: work.area.replace(/^静岡県/, ''), addressCountry: 'JP' } },
-    image: work.photos
-      .map(({ photo, caption }) => {
-        const contentUrl = absoluteUrl(photos[photo].src);
-        return contentUrl ? { '@type': 'ImageObject', contentUrl, caption } : null;
-      })
-      .filter(Boolean),
+    image: work.photos.map(({ photo, caption }) => imageObject(photos[photo].src, caption)).filter(Boolean),
     author: { '@id': `${home}#business` },
     publisher: { '@id': `${home}#business` },
   });

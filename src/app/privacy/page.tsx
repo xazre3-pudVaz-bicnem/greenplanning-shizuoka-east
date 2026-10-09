@@ -1,15 +1,13 @@
 import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import JsonLd from '@/components/ui/JsonLd';
-import { breadcrumbJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { shop } from '@/data/shop';
 
-export const metadata: Metadata = buildMetadata({
-  title: '個人情報保護方針',
-  description: `${shop.name}の個人情報保護方針。お問い合わせでお預かりする個人情報の取り扱いについて。`,
-  path: '/privacy',
-});
+const description = `${shop.name}の個人情報保護方針。お問い合わせでお預かりする個人情報の取り扱いについて。`;
+
+export const metadata: Metadata = buildMetadata({ title: '個人情報保護方針', description, path: '/privacy' });
 
 /** 2026-09-16 → 2026年9月16日 */
 function formatDate(iso: string) {
@@ -91,6 +89,7 @@ export default function PrivacyPage() {
         </div>
       </section>
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd data={webPageJsonLd({ type: 'WebPage', name: '個人情報保護方針', description, path: '/privacy' })} />
     </>
   );
 }

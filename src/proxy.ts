@@ -43,9 +43,23 @@ function unauthorized() {
   });
 }
 
+/** 本番ドメイン（NEXT_PUBLIC_SITE_URL）のホスト名。これ以外は検索結果に出さない */
+const canonicalHost = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_SITE_URL ?? '').host;
+  } catch {
+    return null;
+  }
+})();
+
 export function proxy(request: NextRequest) {
   if (process.env.NODE_ENV !== 'production' || allowIndexing) {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    // vercel.app のプレビューURLなど、本番ドメイン以外で同じ内容が重複インデックスされるのを防ぐ
+    if (allowIndexing && canonicalHost && request.headers.get('host') !== canonicalHost) {
+      res.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    }
+    return res;
   }
 
   const user = process.env.BASIC_AUTH_USER?.trim();

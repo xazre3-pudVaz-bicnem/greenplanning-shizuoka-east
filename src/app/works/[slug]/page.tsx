@@ -6,7 +6,7 @@ import CtaBand from '@/components/ui/CtaBand';
 import JsonLd from '@/components/ui/JsonLd';
 import WorkCase from '@/components/ui/WorkCase';
 import { ArrowIcon } from '@/components/ui/icons';
-import { breadcrumbJsonLd, workJsonLd } from '@/lib/jsonld';
+import { breadcrumbJsonLd, webPageJsonLd, workJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { photos } from '@/data/photos';
 import { shop } from '@/data/shop';
@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WorkPage({ params }: Props) {
   const work = getWork((await params).slug);
   if (!work) notFound();
+  const cover = work.photos.at(-1);
 
   const crumbs = [
     { name: 'ホーム', href: '/' },
@@ -82,6 +83,15 @@ export default async function WorkPage({ params }: Props) {
       <CtaBand id="work-cta" />
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'WebPage',
+          name: workTitle(work),
+          description: work.request,
+          path: `/works/${work.slug}`,
+          primaryImage: cover ? photos[cover.photo].src : undefined,
+        })}
+      />
       <JsonLd data={workJsonLd(work)} />
     </>
   );

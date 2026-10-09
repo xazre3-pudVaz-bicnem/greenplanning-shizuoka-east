@@ -27,7 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 公開前（本部の承認前）・本番URL未設定のときは何も出力しない
   if (!siteUrl || !allowIndexing) return [];
   const base = siteUrl;
-  const url = (p: string) => new URL(p, base).toString();
+  // canonical と同じ形にそろえる（トップは末尾スラッシュなし）
+  const url = (p: string) => (p === '/' ? base : new URL(p, base).toString());
   // ページごとに載せている写真（画像検索に拾ってもらうため）
   const pageImages: Record<string, string[]> = {
     '/': [photos.sceneGarden.src, ...galleryKeys.map((k) => photos[k].src)],

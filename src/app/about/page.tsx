@@ -13,7 +13,8 @@ import { shop } from '@/data/shop';
 import { greeting } from '@/data/story';
 import { photos } from '@/data/photos';
 
-const title = '代表挨拶・店舗情報';
+// 画面の見出しは「代表挨拶・店舗情報」のまま。検索結果向けに所在地を補う
+const title = `代表挨拶・会社概要｜${shop.address.city}の人工芝専門店`;
 const description = `${shop.name}（${shop.hq.name}の${shop.partnerCategory ?? 'パートナー'}）の代表挨拶・店舗情報・会社概要。所在地は${shop.address.full}。担当エリアは${shop.areaLabel}。代表は${shop.representative}。`;
 
 export const metadata: Metadata = buildMetadata({
@@ -109,7 +110,7 @@ export default function AboutPage() {
       <CtaBand id="about-cta" />
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
-      <JsonLd data={webPageJsonLd({ type: 'AboutPage', name: title, description, path: '/about' })} />
+      <JsonLd data={webPageJsonLd({ type: 'AboutPage', name: title, description, path: '/about', primaryImage: photos.representative.src })} />
       <JsonLd data={personJsonLd()} />
     </>
   );

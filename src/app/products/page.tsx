@@ -12,8 +12,10 @@ import { photos } from '@/data/photos';
 import { products, productsPage } from '@/data/products';
 import { shop } from '@/data/shop';
 
-const title = `${productsPage.title}｜高品質人工芝`;
-const description = `${shop.name}が扱う人工芝。${products.map((p) => p.name).join('、')}。${shop.hq.name}と同じラインナップを取り扱っています。`;
+const title = '人工芝の商品ラインナップ｜アメイジングターフ・アイランドグラス';
+const description = `${shop.name}が扱う人工芝。${products
+  .map((p) => p.name)
+  .join('、')}。芝丈や特長の違い、どんな場所に向いているかをご紹介します。`;
 
 export const metadata: Metadata = buildMetadata({
   title,
@@ -98,7 +100,7 @@ export default function ProductsPage() {
       <CtaBand id="products-cta" />
 
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
-      <JsonLd data={webPageJsonLd({ type: 'CollectionPage', name: productsPage.title, description, path: '/products' })} />
+      <JsonLd data={webPageJsonLd({ type: 'CollectionPage', name: productsPage.title, description, path: '/products', primaryImage: photos.productAmazingTurf.src })} />
       <JsonLd
         data={productsJsonLd(
           products.map((p) => ({ name: p.name, anchor: p.anchor, description: p.body, image: photos[p.photo].src, kind: p.kind })),

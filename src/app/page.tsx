@@ -8,6 +8,8 @@ import Reveal from '@/components/ui/Reveal';
 import ShopInfoTable from '@/components/ui/ShopInfoTable';
 import WorkCase from '@/components/ui/WorkCase';
 import { ArrowIcon } from '@/components/ui/icons';
+import JsonLd from '@/components/ui/JsonLd';
+import { webPageJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 import { defaultDescription, homeTitle } from '@/lib/site';
 import { galleryKeys, photos } from '@/data/photos';
@@ -54,7 +56,7 @@ export default function HomePage() {
               className="hero-fade display mt-5 text-[1.7rem] leading-[1.45] text-sumi sm:text-[2.3rem] xl:text-[2.6rem]"
               style={{ ['--hero-delay' as string]: '0.2s' }}
             >
-              <span className="block text-[0.55em] tracking-[0.06em] text-sumi-2">静岡県の人工芝施工</span>
+              <span className="block text-[0.55em] tracking-[0.06em] text-sumi-2">静岡県の人工芝施工</span>{' '}
               <span className="mt-2 block">{shop.name}</span>
             </h1>
             <p className="hero-fade mt-5 text-[0.9rem] leading-[1.9] text-sumi-2" style={{ ['--hero-delay' as string]: '0.35s' }}>
@@ -271,6 +273,16 @@ export default function HomePage() {
       </section>
 
       <CtaBand id="home-cta" />
+
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'WebPage',
+          name: homeTitle,
+          description: defaultDescription,
+          path: '/',
+          primaryImage: photos.kannamiGardenAfter.src,
+        })}
+      />
     </>
   );
 }

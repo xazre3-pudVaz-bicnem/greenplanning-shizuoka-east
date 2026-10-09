@@ -10,7 +10,7 @@ import { regions } from '@/data/areas';
 import { shop } from '@/data/shop';
 import { workTitle, works } from '@/data/works';
 
-const title = `担当エリア｜${shop.areaLabel}の人工芝施工`;
+const title = '担当エリア｜沼津・三島・富士・御殿場・伊豆・静岡市の人工芝施工';
 const description = `${shop.name}の担当エリアは${shop.areaLabel}です。${regions
   .map((r) => (r.municipalities.length > 1 ? `${r.label}（${r.municipalities.slice(0, 3).join('・')}ほか）` : r.label))
   .join('、')}。`;

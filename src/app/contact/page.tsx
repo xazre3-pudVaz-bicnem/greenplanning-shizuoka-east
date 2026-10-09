@@ -13,7 +13,7 @@ import { shop } from '@/data/shop';
 const description = `${shop.name}へのお問い合わせ。電話 ${shop.tel}（${shop.hours.label}）、メール、お問い合わせフォームで受け付けています。写真の添付もできます。`;
 
 export const metadata: Metadata = buildMetadata({
-  title: 'お問い合わせ',
+  title: 'お問い合わせ｜人工芝の施工・販売のご相談',
   description,
   path: '/contact',
 });
