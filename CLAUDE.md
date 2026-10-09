@@ -43,6 +43,15 @@
 - `true` にしても、`HQ_APPROVAL_NOTE`（本部の承認記録）が空、`shop.partnerCategory` が null、`shop.privacyPolicyDate`（公開日）が null、または「要確認」が画面に残っていればビルドが失敗する（`src/lib/publish-guard.ts`・`Pending.tsx`）。**このガードを外さない**
 - 写真は必ず `components/ui/Photo.tsx` で表示する。Basic 認証中は `/_next/image` が元画像を取得できないため `unoptimized` で配信し（`scripts/prepare-images.mjs` で圧縮済み）、公開後は自動で最適化配信に切り替わる
 
+## SEO
+
+- ページごとの狙いは `_internal/キーワード設計_*.md` にまとめている。ページを足すときは、まずこの表に役割を書いてから作る（同じキーワードで競合させない）
+- 「静岡 人工芝」の主軸はトップページ。`/area` は市町名、`/works` は施工事例、`/products` は商品名で役割を分ける
+- title / meta description は画面に出ないので、見出しや本文を変えずに調整してよい。ただし誇張・未確認の内容は書かない
+- 構造化データは `src/lib/jsonld.ts` に集約。areaServed は `data/areas.ts` の実際の担当市町だけを使う。レビューが無いので AggregateRating は出さない
+- 本番ドメイン以外（vercel.app のプレビュー）は `src/proxy.ts` が noindex を付ける。canonical と合わせて重複インデックスを防ぐ
+- 隠しテキスト・クローラー専用の出し分け・量産ページは行わない
+
 ## データの置き場所
 
 | 内容 | ファイル |
